@@ -46,12 +46,56 @@ sudo !!
 ## sudo vs su
 
 1. sudo runs a command as the root user
-2. su <username> opens a shell impersonating <username>. 
+2. su <username> opens a shell impersonating <username>.  
 `su <username> -c "command to execute"  # to execute a command`  
 In Ubuntu root user has no password so there is a difficulty to run su as root user ...
 
 
-gksu / gksudo : Run a graphical command as root / another user
+gksu / gksudo : Run a graphical command as root / another user  
 `$ gksu nautilus`
+
+## dpkg  
+
+Packages are manually installed via the dpkg command (Debian Package Management System). dpkg is the backend to commands like apt-get and aptitude, which in turn are the backend for GUI install apps like the Software Center and Synaptic.
+
+https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-command-line
+
+```bash
+# Install a package
+sudo dpkg -i {package_name}    
+sudo dpkg -i skype-ubuntu-precise_4.2.0.11-1_i386.deb
+# Remove a package
+sudo dpkg -r {package_name}
+sudo dpkg -r vlc
+# Remove a package and its configuration files
+sudo dpkg -P {package_name}
+sudo dpkg -P vlc
+# List all installed packages.
+# You can pipe the command λ less (a pager) so you can more easily scroll the content:
+dpkg -l | less
+# Check if the package is installed or not
+dpkg -l {package_name}
+dpkg -l vlc
+# See whether a package is installed or not
+# And this will show the location where the package will be installed. Here -S (capital S) to search whether the package was installed or not.
+sudo dpkg -S {package_name}
+sudo dpkg -S skype
+``` 
+
+## apt-get  
+```bash
+sudo apt list --installed | grep php   # list installed php packages 
+
+sudo apt-cache search php7-*    # find the name of a package from repos  
+
+sudo apt-get install php7.1-mbstring 
+
+# SSH install in Ubuntu:
+sudo apt-get install openssh-server 
+sudo service ssh status
+
+# completely uninstall (application + system configuration files) an application
+$ sudo apt purge gitkraken 
+```
 
 
