@@ -19,26 +19,26 @@ https://try.github.io/levels/1/challenges/1
 * make-the-current-commit-the-only-initial-commit-in-a-git-repository:  
 http://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-initial-commit-in-a-git-repository
 
-Here's the brute-force approach. It also removes the configuration of the repository:  
-http://stackoverflow.com/questions/1257592/how-do-i-remove-files-saying-old-mode-100755-new-mode-100644-from-unstaged-cha
+    Here's the brute-force approach. It also removes the configuration of the repository:  
+    http://stackoverflow.com/questions/1257592/how-do-i-remove-files-saying-old-mode-100755-new-mode-100644-from-unstaged-cha
 
-Note: This does NOT work if the repository has submodules! If you are using submodules, you should use e.g. interactive rebase
+    Note: This does NOT work if the repository has submodules! If you are using submodules, you should use e.g. interactive rebase
 
-Step 1: remove all history  
-`rm -rf .git`
+    Step 1: remove all history  
+    `rm -rf .git`
 
-Step 2: reconstruct the Git repo with only the current content  
-`
-git init
-git add .
-git commit -m "Initial commit"
-`
+    Step 2: reconstruct the Git repo with only the current content  
+    `
+    git init
+    git add .
+    git commit -m "Initial commit"
+    `
 
-Step 3: push to GitHub.  
-`
-git remote add origin <github-uri>    # add a remote repo
-git push -u --force origin master
-`
+    Step 3: push to GitHub.  
+    `
+    git remote add origin <github-uri>    # add a remote repo
+    git push -u --force origin master
+    `
 
 * How do I make Git ignore file mode (chmod) changes? (I have a project in which I have to change the mode of files with chmod to 777 while developing, but which should not change in the main repo.)  
 `git config core.filemode false`
