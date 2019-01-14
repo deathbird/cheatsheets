@@ -11,6 +11,11 @@ http://www.sitepoint.com/understanding-version-control-diffs/
 http://www.sitepoint.com/whats-new-git-2-0  
 https://try.github.io/levels/1/challenges/1  
 
+http://marklodato.github.io/visual-git-guide/index-en.html  
+http://ndpsoftware.com/git-cheatsheet.html  
+https://github.com/git-tips/tips#everyday-git-in-twenty-commands-or-so  
+https://learngitbranching.js.org/  
+
 ## Find file - text
 
 show in which commits a file changed  
