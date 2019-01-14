@@ -28,6 +28,19 @@ Search commit log across all branches for given text
 
 ## push
 ```bash
+git push  # (sends your code to the current branch of origin remote. )
+
+# (the code from your current active branch is pushed to the branch by the same name on the remote)
+git push [remote]
+
+git push [remote] [branch]
+
+# (you can push from a local branch to a branch by a different name on the remote)
+git push [remote] [local_branch]:[remote_branch]
+
+# (If you supply an empty [local_branch], it will delete the remote_branch on the server)
+git push [remote] :[remote_branch]
+
 git push -f origin STAGING  
 git push origin r-3.0.0/develop:r-3.0.0/develop  
 ## push -v (verbose), --tags (push tags), -c (config options)
@@ -36,6 +49,8 @@ git -c diff.mnemonicprefix=false -c core.quotepath=false push -v --tags origin r
 
 ## checkout
 ```bash
+git fetch -v : # update local branch list from remote 	
+
 git checkout -b r-2.0.0/qa --track origin/r-2.0.0/qa
 ```
 
@@ -66,6 +81,17 @@ git push [remote] :[branch_name]		  # delete a branch from a remote
 git branch -D [branch_name]               # delete local branch irrespective of its merged status  
 git remote prune [remote]				  # prune stale (deleted but not garbage collected?) branches from [remote]  
 ``` 
+
+## merge
+```bash
+# (checkout master and merge the desired branch to it)
+git checkout master 
+git merge [branch_name]
+
+# (picking a single commit from a different branch and merging it with your current one)
+git cherry-pick [commit_hash]
+
+```
 
 ## submodules
 ```bash
@@ -109,6 +135,10 @@ Submodule path 'Edge': checked out 'a630946a9a52af3386f9839cffebf403e7742a19'
 git log --graph --all (--oneline)  
 git log --graph --all --oneline --decorate=full # see log graph with branches / tags etc.  
 git log --oneline --decorate  # one line output with all references (branches, tags, etc)  
+
+# pretty print tree of branches:
+git log --graph --decorate --oneline  
+git log --graph --pretty=oneline --abbrev-commit  
 ```  
 
 ## config  
@@ -159,6 +189,13 @@ git commit --amend
 
 #(amend last commit message comment BEFORE PUSHING)  
 git commit --amend -m "New commit message for previous commit."  
+
+# return back origin to previous commit 
+# -------------------------------------
+git reset --hard f0fcac15ae4ed32fa3038ab2a7f1fdf91dc9e8e7  # 1. reset local branch to a previous good commit
+git push [remote] :[branch_name]		  # 2. delete the same branch from the remote
+git push origin STAGING					  # 3. push again corrected branch to remote!!!
+
 ```  
 
 ## remove / delete files
@@ -200,6 +237,84 @@ git remote show [remote-name]  # (eg. git remote show origin)
 
 ```
 
+## stashing
+```bash
+# (Stash essentially takes all your changes and stores them for further use)  
+git stash save 'helpfull message about the stashed version'  
+
+git stash list  
+
+git stash pop   # apply the last stash and remove it from stash list  
+
+git stash apply # apply the last stash and KEEP it in stash list  
+git stash apply stash@{2}  
+```
+
+## rebase
+```bash
+# (squash number_of_commits into one)
+git rebase -i HEAD~[number_of_commits]
+
+# Rebase with squash  
+# -----------------------------------  
+git rebase -i HEAD~n    # n : number of commits
+
+# if it breaks you write :
+git rebase --abort
+
+# if there are conflicts you amend them and continue the rebase  
+git rebase --continue  
+
+# Rebase for fast-forward  
+# -----------------------------------
+# https://git-scm.com/book/en/v2/Git-Branching-Rebasing  
+
+$ git checkout experiment_branch  
+$ git rebase master  
+First, rewinding head to replay your work on top of it...  
+Applying: added staged command  
+$ git checkout master  
+$ git merge experiment  
+```
+
+## tags
+```bash
+git tag  # show all tags
+
+git log --decorate=full  # show log with tags info
+
+git tag -d v1.2.001 # delete lightweight(?) tag
+
+# create lightweight tag for a given commit
+git tag v1.2.001 090cb257b5b
+git tag 3.1.0006 48d0b269a
+
+git show v1.2.001  # show the commit of a tag
+
+git push origin 3.1.0006  # push tag to repo
+
+git push --delete origin 3.1.0017  # delete remote tag
+
+# If you also need to delete the local tag, use:
+git tag --delete 3.1.0017
+
+##### bash script to assign tags ##########
+
+indx=0
+for commit in $(git rev-list 48e33402103..HEAD | tac)
+do
+        echo $commit
+        # zero pad indx -> indxf variable
+        printf -v indxf "%04d" $indx
+        echo $indxf
+        # tag commit
+        git tag 2.0.$indxf $commit
+        # increment indx
+        indx=$((indx+1))
+#        echo $indx
+done
+```  
+
 ## FAQ - Various
 
 * Show all commits after a given commit and HEAD:  
@@ -231,4 +346,10 @@ http://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-init
 
 * How do I make Git ignore file mode (chmod) changes? (I have a project in which I have to change the mode of files with chmod to 777 while developing, but which should not change in the main repo.)  
 `git config core.filemode false`
+
+* create a patch
+`git diff [branch1] [branch2] > [file_name]`
+
+* apply patch
+`git apply [file_name]`
 
