@@ -99,13 +99,8 @@ git config --global --edit
 # If you want to revert changes made to the index (i.e., that you have added). It undoes unstaged local modification.  
 git checkout .   
 
-# To undo staged modifications, use git reset with path specifier.
-git reset .
-
-git reset
-
-# If you want to revert a change that you have committed
-git revert ...
+# To undo all staged (added) modifications, use git reset
+git reset  
 
 # undo last commit: rewind your current HEAD branch return to the one before the current revision
 # After running the command, you'll find the changes as uncommitted local modifications in your working copy.
@@ -114,9 +109,6 @@ git reset --soft HEAD~1
 # If you don't want to keep these changes, simply use the --hard flag
 git reset --hard HEAD~1
 
-# ABORT MERGE!!!!!
-git merge --abort 
-
 # DELETE LAST LOCAL COMMIT:
 git reset HEAD~  ή git reset HEAD^ --hard
 
@@ -124,8 +116,29 @@ git reset HEAD~  ή git reset HEAD^ --hard
 git reset --hard HEAD~3
 
 # DELETE LAST LOCAL + REMOTE COMMIT:
-git reset HEAD^ --hard
-git push origin -f
+git reset HEAD^ --hard  
+git push origin -f  
+
+# If you want to revert a change that you have committed  
+git revert ...  
+
+# ABORT MERGE!!!!!  
+git merge --abort  
+```  
+
+## diff (show differences)
+```bash
+# show all commited files differences  
+git show <hash>  
+
+## (View differences:)
+git diff <file>
+
+## (View differences of SPECIFIC COMMIT:)
+git diff COMMIT_HASH^ COMMIT_HASH
+
+## (View differences of certain file between commits)
+git diff HEAD^^ HEAD main.c
 ```  
 
 ## FAQ - Various
