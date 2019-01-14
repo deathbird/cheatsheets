@@ -11,6 +11,123 @@ http://www.sitepoint.com/understanding-version-control-diffs/
 http://www.sitepoint.com/whats-new-git-2-0  
 https://try.github.io/levels/1/challenges/1  
 
+## Find file - text
+
+show in which commits a file changed  
+`git log --follow Models/Widget/Content/Content.php`
+
+shows the changes of a file, work even if the file was deleted !!!!  
+`git log -- [file path]`
+
+show all files commited on a specific commit  
+`git diff-tree --no-commit-id --name-only -r bd61ad98`
+
+Search commit log across all branches for given text  
+`git log --all --grep='<given-text>'  
+`  
+
+## push
+```bash
+git push -f origin STAGING  
+git push origin r-3.0.0/develop:r-3.0.0/develop  
+## push -v (verbose), --tags (push tags), -c (config options)
+git -c diff.mnemonicprefix=false -c core.quotepath=false push -v --tags origin r-3.0.0/develop:r-3.0.0/develop  
+```  
+
+## checkout
+```bash
+git checkout -b r-2.0.0/qa --track origin/r-2.0.0/qa
+```
+## submodules
+```bash
+git submodule update --init --recursive   #(That worked!!!!)  
+git submodule update --recursive  
+git submodule update --recursive --remote  #(updating to latest tips of all remote branches)  
+
+# checkout with submodules  
+# checkout a branch (here master) plus submodules  
+git clone --recursive ssh://git@stash.intralot.com:7999/igcprojects/moroccodesktop.git  
+
+# checkout a remote branch and then it's submodules  
+$ git checkout -b mobileApp --track origin/mobileApp  
+Branch mobileApp set up to track remote branch mobileApp from origin.   
+Switched to a new branch 'mobileApp'  
+$ git pull  
+$ git submodule update  
+Submodule path 'Edge': checked out 'cbdb02f1aed1bd3828db17c91c0d08c369045202'  
+Submodule path 'Sportsbook': checked out 'ad330075757f1886976efcd601555726a7c403d3'  
+
+# clone latest version of project WITH submodules  
+~/projects/www$ git clone --recursive ssh://git@stash.intralot.com:7999/igcprojects/oddsetmobile.git  
+...
+~/projects/www$ cd oddsetmobile/  
+~/projects/www/oddsetmobile$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+~/projects/www$ cd oddsetmobile/
+~/projects/www/oddsetmobile$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+~/projects/www/oddsetmobile$ git submodule update --recursive --remote
+Submodule path 'Cms': checked out '554ab914293239f2ba45086cec2e585de08d8a2c'
+Submodule path 'Edge': checked out 'a630946a9a52af3386f9839cffebf403e7742a19'
+```  
+
+## log
+```bash  
+git log --graph --all (--oneline)  
+git log --graph --all --oneline --decorate=full # see log graph with branches / tags etc.  
+git log --oneline --decorate  # one line output with all references (branches, tags, etc)  
+```  
+
+## config  
+```bash
+# dont output crlf warnings  
+git config --global core.autocrlf true   
+
+# what file global config is saved in  
+git config --global --edit
+```  
+
+## UNDO!!!!
+
+```bash
+# Usage with path specifier (dot matches all files)   
+# https://stackoverflow.com/questions/14460595/git-checkout-with-dot  
+# If you want to revert changes made to the index (i.e., that you have added). It undoes unstaged local modification.  
+git checkout .   
+
+# To undo staged modifications, use git reset with path specifier.
+git reset .
+
+git reset
+
+# If you want to revert a change that you have committed
+git revert ...
+
+# undo last commit: rewind your current HEAD branch return to the one before the current revision
+# After running the command, you'll find the changes as uncommitted local modifications in your working copy.
+git reset --soft HEAD~1  
+
+# If you don't want to keep these changes, simply use the --hard flag
+git reset --hard HEAD~1
+
+# ABORT MERGE!!!!!
+git merge --abort 
+
+# DELETE LAST LOCAL COMMIT:
+git reset HEAD~  ή git reset HEAD^ --hard
+
+# delete last 3 local commits
+git reset --hard HEAD~3
+
+# DELETE LAST LOCAL + REMOTE COMMIT:
+git reset HEAD^ --hard
+git push origin -f
+```  
+
 ## FAQ - Various
 
 * Show all commits after a given commit and HEAD:  
