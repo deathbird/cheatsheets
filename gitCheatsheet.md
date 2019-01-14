@@ -38,6 +38,35 @@ git -c diff.mnemonicprefix=false -c core.quotepath=false push -v --tags origin r
 ```bash
 git checkout -b r-2.0.0/qa --track origin/r-2.0.0/qa
 ```
+
+## branches
+```bash
+git branch -a   # (show all local and remote brances!)  
+git branch -r   # (show ONLY remote brances!)  
+git branch -u origin/r-3.0.0/feature/IGC-479  # (set current local branch to track remote - upstream branch, -u: upstream)  
+
+# (To create a new branch from current HEAD and switch to it immediately, use:)  
+# new branch points to current branch HEAD  
+git checkout -b [new_branch_name]  
+
+# Go back in time: new branch points to a previous commit and NOT the current branch HEAD  
+git checkout -b [new_branch_name]  [hash of previous commit from current branch]  
+
+git fetch [remote]		# (Fetch all of the branches from the repository)
+# (create a local branch and checkout a remote branch to it. The new branch is tracked - git push works!)  
+git checkout --track [remote]/[a_remote_branch]   
+# push local branch and track at the same time (-u is short for --set-upstream).  
+3. git push -u origin <branch>  
+
+# (create a branch based on an old commit append the hash that identifies a commit with the command.)  
+git checkout -b [branch_name] [commit_hash]  
+
+git push [remote] --delete [branch_name]  # delete a branch from a remote  
+git push [remote] :[branch_name]		  # delete a branch from a remote  
+git branch -D [branch_name]               # delete local branch irrespective of its merged status  
+git remote prune [remote]				  # prune stale (deleted but not garbage collected?) branches from [remote]  
+``` 
+
 ## submodules
 ```bash
 git submodule update --init --recursive   #(That worked!!!!)  
@@ -124,6 +153,22 @@ git revert ...
 
 # ABORT MERGE!!!!!  
 git merge --abort  
+
+#(amend last commit comment BEFORE PUSHING)  
+git commit --amend  
+
+#(amend last commit message comment BEFORE PUSHING)  
+git commit --amend -m "New commit message for previous commit."  
+```  
+
+## remove / delete files
+```bash
+# (Remove from git no file / folder delete):
+git rm --cached [file_name]  
+git rm -r --cached [folder_name]  
+
+# (Remove from git and from file system)  
+git rm [file_name]  
 ```  
 
 ## diff (show differences)
@@ -139,7 +184,21 @@ git diff COMMIT_HASH^ COMMIT_HASH
 
 ## (View differences of certain file between commits)
 git diff HEAD^^ HEAD main.c
-```  
+
+git diff [branch_name1]..[branch_name2]  
+``` 
+
+## repos
+```bash
+# (origin: a remote repo you have write access)
+# (add a remote as origin:)
+git remote add origin https://github.com/sdaityari/my_git_project.git
+
+git remote -v #(verbose, show remote repo)
+
+git remote show [remote-name]  # (eg. git remote show origin)
+
+```
 
 ## FAQ - Various
 
