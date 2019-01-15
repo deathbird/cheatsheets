@@ -258,6 +258,7 @@ git stash apply stash@{2}
 ## rebase
 ```bash
 # (squash number_of_commits into one)
+# https://stackoverflow.com/questions/5189560/squash-my-last-x-commits-together-using-git
 git rebase -i HEAD~[number_of_commits]
 
 # Rebase with squash  
