@@ -175,6 +175,120 @@ $ man 5 passwd   # opens a page from section 5 -> man <section> <file>
 # Explanation of linux folder hierarchy
 $ man hier
 ```  
+## Process manage / info
+
+system services mgmt: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units  
+logging :             https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs  
+unit files:           https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files  
+
+```bash
+# linux version:
+	cat /etc/*release*
+	cat /proc/version
+	cat /proc/cpuinfo
+
+# Using systemctl is the latest way:
+
+> systemctl list-units --all | grep apache
+  apache2.service                           loaded    inactive dead      LSB: Apache2 web server
+
+> systemctl                                        # see a list of all the active (ONLY) units 
+> systemctl list-units --all --state=inactive      # filter inactive services
+> systemctl list-units --type=service              # filter units of type service
+
+> sudo systemctl status apache2
+> systemctl cat apache2.service                    # To display the unit file that systemd has loaded into its system
+> sudo systemctl start apache2
+> sudo systemctl stop apache2
+> sudo systemctl restart apache2
+> sudo systemctl reload apache2                     # reload service configuration without restart if supported!!
+> sudo systemctl reload-or-restart apache2.service
+> sudo systemctl enable application.service         # enalbe service for autostart on system boot
+> sudo systemctl disable application.service        # disable
+> systemctl is-active application.service
+> systemctl is-enabled application.service
+> systemctl is-failed application.service
+> systemctl list-dependencies sshd.service          # see a unit's dependency tree
+> systemctl show sshd.service                       # To see the low-level properties of a unit
+# 'mask' a unit to prevent the X service from being started, automatically or manually, for as long as it is masked.
+> sudo systemctl mask nginx.service                 
+> sudo systemctl unmask nginx.service               # Undo 'mask'ing a unit
+> systemctl list-unit-files                         # to show also masked services!!!
+> timedatectl                                       # !!! timezone info
+
+
+# Other ways to do services management:
+
+	sudo /etc/init.d/apache stop
+
+	sudo service httpd start
+	sudo service mysqld start
+	sudo service mysqld restart
+	sudo service memcached restart && service session_cache restart
+	
+	sudo service mysql status
+	sudo service mysql start
+
+       # set service to autostart
+	sudo chkconfig httpd on	     
+	sudo chkconfig mysqld on 
+
+       # list autostart services
+	sudo chkconfig --list | grep mysqld  
+
+# services running check:
+	
+	service httpd status
+	service apache2 status
+	service mysql status
+	ps aux | grep apache
+        # check all running servers on machine!!!
+	sudo netstat -tulpen 
+       
+# task management:
+
+	top
+
+		# press k (kill) PID (enter twice)
+		# press h (help)
+
+# kill process by pid:
+
+	ps aux | grep java	# find process by name. Alternatively use : pidof java
+	kill -SIGTERM <pid>	# kill sending termination signal to the process (the safest way).
+        kill -9 <pid>           # if above kill and anything else fails!!!
+       
+# EXAMPLE: stopping a misbehaving memchache to restart memcache. Session_cache below also runs in Memcache.
+[root@igcdemo current]> service --status-all | grep memcach
+memcached (pid  3237) is running...
+memcached dead but pid file exists
+
+[root@igcdemo ~]> ls -al /var/run/memcached/
+total 12
+drwxr-xr-x   2 memcached memcached 4096 2018-05-30 14:16 .
+drwxr-xr-x. 22 root      root      4096 2018-03-28 14:47 ..
+-rw-r--r--   1 memcached memcached    5 2017-12-05 22:02 session_cache.pid
+
+[root@igcdemo ~]> rm /var/run/memcached/session_cache.pid 
+rm: remove regular file `/var/run/memcached/session_cache.pid'? y
+
+[root@igcdemo ~]> service --status-all | grep memcach
+memcached is stopped
+memcached is stopped
+[root@igcdemo ~]> service session_cache start
+Starting memcached:                                        [  OK  ]
+[root@igcdemo ~]> service memcache start
+memcache: unrecognized service
+[root@igcdemo ~]> service memcached start
+Starting memcached:                                        [  OK  ]
+[root@igcdemo ~]> service --status-all | grep memcach
+memcached (pid  5217) is running...
+memcached (pid  5192) is running...	
+```  
+
+
+
+
 
 
 
