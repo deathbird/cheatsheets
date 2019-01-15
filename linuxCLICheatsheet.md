@@ -97,5 +97,86 @@ sudo service ssh status
 # completely uninstall (application + system configuration files) an application
 $ sudo apt purge gitkraken 
 ```
+## files (find, compare, zip...)
+**Everything is a file: even a device (monitor, printer), a directory etc.**  
+```bash
+# list only hidden files  
+$ ls -ld .?*  
+
+# unzip *.tar.gz  
+$ tar -xzf file1.tar.gz  
+
+# unzip *.gz  
+$ gunzip file1.gz  
+
+# Display file or file system status, timestamps (Access, Modify, Change)  
+# https://unix.stackexchange.com/questions/2464/timestamp-modification-time-and-created-time-of-a-file  
+$ stat <filename>  
+
+# Locate the binary file  
+$ which apache2  
+
+# Locate the binary, source, and manual-page files for a command  
+$ whereis apache2  
+
+# Show all possibilities of a command  
+$type -a echo  
+echo is a shell builtin  
+echo is /bin/echo  
+
+# compare files / folders:  
+# -r : recursive, -q : short syntax, -l : paginate  
+diff -rql  nlo-toto/Public/static/cms/ CanvasDocker/Public/static/cms/  
+
+# will show if two binary files are the same or not:  
+[me@host ~]$ diff 1.bin 2.bin
+Binary files 1.bin and 2.bin differ
+# If there is no output from the command, it means that the files have no differences.  
+```  
+
+## Get Help
+```bash
+man <term> # term can be a bash command, a config file ( or daemon (ex. apache2)
+
+# search for command in manual pages
+man -k <search-term>
+apropos <search-term>
+
+# GLOBAL search for command in manual pages
+man -K <search-term>
+
+# find info for files. Linux is extensionless (extension dont mean a thing).
+file <filename>
+
+# description of manual page
+$ whatis apache2
+
+# Locate the binary, source, and manual-page files for a command
+$ whereis apache2
+
+# man sections to open as: man <section> <file>
+       1   Executable programs or shell commands
+       2   System calls (functions provided by the kernel)
+       3   Library calls (functions within program libraries)
+       4   Special files (usually found in /dev)
+       5   File formats and conventions eg /etc/passwd
+       6   Games
+       7   Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)
+       8   System administration commands (usually only for root)
+       9   Kernel routines [Non standard]
+
+# for example passwd is a command and a file (*.gz are man pages)
+$ whereis passwd  
+passwd: /usr/bin/passwd /etc/passwd /usr/share/man/man5/passwd.5.gz /usr/share/man/man1/passwd.1ssl.gz /usr/share/man/man1/passwd.1.gz
+$ man passwd     # opens the first manual found
+$ man 5 passwd   # opens a page from section 5 -> man <section> <file>
+
+
+# Explanation of linux folder hierarchy
+$ man hier
+```  
+
+
+
 
 
