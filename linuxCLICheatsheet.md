@@ -26,6 +26,7 @@ http://www.gnu.org/software/bash/manual/bash.html
 https://ss64.com/bash/syntax-keyboard.html 
 https://clementc.github.io/blog/2018/01/25/moving_cli/
 
+Ctrl + D : exit
 CTRL + A : goto start of line  
 CTRL + E : goto end of line  
 CTRL + L : clear screen above current line 
@@ -42,6 +43,12 @@ sudo !!
 
 !:n selects ONLY the nth argument of the last command  
 !$ selects the last argument of the last command. 
+
+## Various
+```bash
+# last boot time:
+who -a
+``` 
 
 ## sudo vs su
 
@@ -97,6 +104,17 @@ sudo service ssh status
 # completely uninstall (application + system configuration files) an application
 $ sudo apt purge gitkraken 
 ```
+
+## yum (CentOS package manager) 
+```bash
+# check if app is installed (centos)
+yum list installed httpd
+yum list installed mysql-server
+
+# check if apache is installed alternative (centos)
+rpm -qa | grep httpd
+```
+
 ## files (find, compare, zip...)
 **Everything is a file: even a device (monitor, printer), a directory etc.**  
 ```bash
@@ -285,6 +303,56 @@ Starting memcached:                                        [  OK  ]
 memcached (pid  5217) is running...
 memcached (pid  5192) is running...	
 ```  
+## Directories
+```bash
+# delete non empty directory:
+rm -rf <dir_name>
+
+# copy folder recursively, verbose, with all attributes:
+cp -avr ./leaderboard /home/vagrant/
+
+# zip folder and subfolders:
+zip -r zip_filename.zip /path/to/folder
+
+
+# show tree directory structure (install tree utility -> sudo apt install tree)
+tree -d .
+
+# Back to home dir:
+cd
+```  
+
+## Free disk space
+```bash
+# -h : human readable (1M = 1024Kb etc)
+df -h
+
+# find folder size (du summarizes disk usage of each FILE, recursively for directories,)
+du -hs /path/to/directory
+```
+
+
+## Disks - partitions
+```bash  
+# friendly listing
+$ sudo lsblk -f
+
+# device <-> mount point mapping !!!!
+$ df -h --output=source,target
+
+# alternative, not so human friendly
+$ sudo fdisk -l
+
+# list mounted filesystems
+$ findmnt
+
+# list all mounts
+$ cat /proc/mounts
+$ cat /proc/mounts | grep ext4  # or grep vfat (to display usb drives)
+```  
+
+
+
 
 
 
