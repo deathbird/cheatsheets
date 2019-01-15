@@ -1,4 +1,8 @@
-# Linux / Bash CLI Cheatsheet  
+# Linux / Bash CLI Cheatsheet 
+
+** You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
+and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal. **
+
 
 ## Links
 
@@ -44,11 +48,29 @@ sudo !!
 !:n selects ONLY the nth argument of the last command  
 !$ selects the last argument of the last command. 
 
-## Various
+## Various BASH useful
 ```bash
 # last boot time:
 who -a
-``` 
+
+# where bash finds the program to run for a command name, the -a switch shows all posibilities
+$ type -a echo
+echo is a shell builtin
+echo is /bin/echo
+
+# set environment variable
+$ PATH=$PATH:~/bin:/usr/local/bin:/bin:/usr/bin
+
+# set environment variable permanently for user by editing ~/.profile file, for example last line:
+# set PATH so it includes user's private bin directories
+PATH="$HOME/bin:$HOME/.local/bin:$PATH:/opt/PhpStorm-183.4886.46/bin"
+
+# show environment variable
+echo "$PATH"
+
+#You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
+# and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal.
+```  
 
 ## sudo vs su
 
@@ -350,6 +372,56 @@ $ findmnt
 $ cat /proc/mounts
 $ cat /proc/mounts | grep ext4  # or grep vfat (to display usb drives)
 ```  
+
+## Network
+```bash
+# show used ports
+sudo lsof -i
+
+# show processes using specific port
+sudo lsof -i :3306
+
+# get binary script from PID from lsof listing:
+COMMAND     PID USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+firefox   22745  jdi   50u  IPv4 2778942      0t0  TCP 10.70.30.223:38378->40.100.174.2:https (ESTABLISHED)
+
+$ls -l /proc/22745/exe
+lrwxrwxrwx 1 jdi jdi 0 Νοέ   3 09:55 /proc/22745/exe -> /usr/lib/firefox/firefox
+
+$ whatis firefox
+firefox (1)          - a free and open source web browser from Mozilla
+
+# report working directory of a process PID
+$pwdx 22745
+```
+
+
+## Redirections
+```bash
+$ ls -l a b >myfiles.ls 2>/dev/null
+
+# Redirections: Make FD2 write to where FD1 is writing (FD copying: The connection to the stream used by FD y is copied to FD x.)
+---------------------------------------------------------------------------------------------------------------------------------
+$ ls -l a b >myfiles.ls 2>&1            # CORRECT! Redirecting standard output and standard error.
+$ ls -l a b &>myfiles.ls		# CORRECT! Shortcut of the above. 
+$ ls -l a b >myfiles.ls 2>myfiles.ls    # WRONG! WRONG! The streams end up mixed in the output file!!!! Use the above way.
+$ ls -l a b 2>&1 >myfiles.ls		# ALSO WRONG! Copy FD2 to FD1 but FD1 hasn't been redirected (to file) yet so it is still the terminal output.
+
+# File redirection: Make FD x write to / read from file.
+---------------------------------------------------------
+$ echo Hello >~/world	# Default FD for writing is FD 1.
+$ rm file 2>/dev/null
+$ read line <file	# Default FD for reading is FD 0.
+
+# Appending file redirection
+$ echo World >>~/world	# Append also FD1 to file.
+$ echo World &>>~/world	# Append also FD2 (error) to file.
+
+# copy to clipboard (install xclip command first):
+$ xclip -selection clipboard < ~/.ssh/id_rsa.pub   # copy contents of private key file to clipboard
+$ php -i | xclip -selection clipboard              # send/pipe command output to clipboard!!
+$ xclip -selection clipboard - o                   # paste to std output clipboard contents!!
+```   
 
 
 
