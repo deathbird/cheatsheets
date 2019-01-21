@@ -561,9 +561,10 @@ xinetd example: http://sysbible.org/2008/12/04/having-haproxy-check-mysql-status
 https://medium.com/@jgefroh/demystifying-dns-for-web-developers-ace5a3ae559f  
 https://dougrathbone.com/blog/2012/03/03/devops-dns-for-developers-ndash-now-therersquos-no-excuse-not-to-know  
 
-<subdomain of subdomain>.<subdomain>.<domain>.<TLD>
-TLD: top level domain
 ```bash  
+# <subdomain of subdomain>.<subdomain>.<domain>.<TLD>  
+# TLD: top level domain  
+
 $ nslookup
 > atcom.gr
 ... απάντηση εμφανίζοντας Α records
