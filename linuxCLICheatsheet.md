@@ -20,7 +20,10 @@ http://mywiki.wooledge.org/BashFAQ
 http://wiki.bash-hackers.org/
 https://terminalsare.sexy/  
 
-http://www.gnu.org/software/bash/manual/bash.html  
+http://www.gnu.org/software/bash/manual/bash.html 
+
+DDOS attack investigation:  
+https://www.2daygeek.com/count-check-apache-concurrent-connections-using-netstat-command/#
 
 ## Tools
 * [ShellCheck - finds bugs in your shell scripts](https://www.shellcheck.net/)  
@@ -70,6 +73,21 @@ echo "$PATH"
 
 #You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
 # and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal.
+
+# Follow log:
+tail -100f /path/to/file | grep the_string_to_search_for
+
+# show users
+cat /etc/passwd
+
+# show groups
+cat /etc/group
+
+# show groups the current user is in:
+groups $USER
+
+# add user to group
+sudo usermod -aG docker <username>
 ```  
 
 ## sudo vs su
@@ -135,6 +153,28 @@ yum list installed mysql-server
 
 # check if apache is installed alternative (centos)
 rpm -qa | grep httpd
+
+# CentOS 6.5 setup apache, mysql, php 
+------------------------------------
+sudo yum install httpd
+
+# mysql 5.6 installation
+sudo yum localinstall mysql-community-release-el6-5.noarch.rpm
+sudo yum install mysql-community-server
+sudo service mysqld start
+sudo /usr/bin/mysql_secure_installation
+sudo vim /etc/my.cnf
+sudo service mysqld restart
+
+# php 5.5 set repo (https://webtatic.com/packages/php55/)
+
+rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
+
+# install php
+sudo yum install php55w php55w-opcache php55w-cli php55w-common php55w-gd php55w-mbstring php55w-mcrypt php55w-mysql php55w-pdo php55w-soap php55w-xml
+
+# restart apache
+
 ```
 
 ## files (find, compare, zip...)
@@ -401,14 +441,12 @@ $pwdx 22745
 $ ls -l a b >myfiles.ls 2>/dev/null
 
 # Redirections: Make FD2 write to where FD1 is writing (FD copying: The connection to the stream used by FD y is copied to FD x.)
----------------------------------------------------------------------------------------------------------------------------------
 $ ls -l a b >myfiles.ls 2>&1            # CORRECT! Redirecting standard output and standard error.
 $ ls -l a b &>myfiles.ls		# CORRECT! Shortcut of the above. 
 $ ls -l a b >myfiles.ls 2>myfiles.ls    # WRONG! WRONG! The streams end up mixed in the output file!!!! Use the above way.
 $ ls -l a b 2>&1 >myfiles.ls		# ALSO WRONG! Copy FD2 to FD1 but FD1 hasn't been redirected (to file) yet so it is still the terminal output.
 
 # File redirection: Make FD x write to / read from file.
----------------------------------------------------------
 $ echo Hello >~/world	# Default FD for writing is FD 1.
 $ rm file 2>/dev/null
 $ read line <file	# Default FD for reading is FD 0.
@@ -421,7 +459,137 @@ $ echo World &>>~/world	# Append also FD2 (error) to file.
 $ xclip -selection clipboard < ~/.ssh/id_rsa.pub   # copy contents of private key file to clipboard
 $ php -i | xclip -selection clipboard              # send/pipe command output to clipboard!!
 $ xclip -selection clipboard - o                   # paste to std output clipboard contents!!
-```   
+```  
+
+## grep  
+```bash
+
+# -r: recursive, --color=... use color highlight , use more for paging
+grep -v --color=always "Edge::app()->getConfig" * | more
+
+# -v FIRST exclude a pattern before selecting a pattern with LAST grep
+grep -v -r "Edge::app()->i18n" * | grep --color=always  "Edge::app()->" | more
+
+# -v exclude a series of patterns before last grep that selects remaining pattern
+grep -v -r "Edge::app()->i18n" * | grep -v "Edge::app()->getConfig" | grep -v "Edge::app()->logger" | grep -v "Edge::app()->cache" | grep -v "Edge::app()->db" | grep -v "Edge::app()->user" | grep -v "Edge::app()->router" | grep -v "Edge::app()->request" | grep -v "Edge::app()->response" | grep -v "Edge::app()->session" |grep --color=always  "Edge::app()->" | more
+
+# print only filenames for --include pattern files, excluding exclude-dir folder
+grep -lr --include=*.js --exclude-dir=*node_modules* 'setTimeout('
+```  
+
+## Find the location of an icon of a launcher in use
+```bash
+Most of the time, the icon will be chosen from your current icon theme, rather than being referred to as an absolute path.
+(usr/share/applications)
+
+Open Gedit
+Drag the launcher into the Gedit window
+Look for the Icon definition:
+
+Icon=gnome-panel-launcher
+You can then find the icon somewhere in /usr/share/icons, depending on your theme.
+
+Other possible folders containing icons:
+/usr/share/icons/     (typically contains pre-installed themes shared by all users) 
+/usr/share/pixmaps/
+/usr/share/app-install/icons/
+~/.local/share/icons
+~/.local/icons
+~/.icons/
+./home/jdi/.local/share/applications/jetbrains-phpstorm.desktop 
+```  
+
+## apachectl commands - apache
+```bash  
+# Show apache vhosts and runtime config !!!
+apachectl -S
+
+# show modules loaded
+apachectl -M
+
+# old apache installation
+$ cd /etc/httpd
+$ ls -al
+drwxr-xr-x    4 root root  4096 2015-10-19 12:02 .
+drwxr-xr-x. 100 root root 12288 2018-01-04 15:44 ..
+drwxr-xr-x    2 root root  4096 2015-10-19 12:02 conf
+drwxr-xr-x    2 root root  4096 2018-02-20 11:07 conf.d
+lrwxrwxrwx    1 root root    19 2015-10-19 12:02 logs -> ../../var/log/httpd
+lrwxrwxrwx    1 root root    29 2015-10-19 12:02 modules -> ../../usr/lib64/httpd/modules
+lrwxrwxrwx    1 root root    19 2015-10-19 12:02 run -> ../../var/run/httpd
+
+# /etc/httpd/conf folder contains httpd.conf file that states which other conf (vhost) files  the server imports. Generally they are under conf.d dir.
+$ ls conf.d/
+oddset.conf  php.conf  README  welcome.conf  # here we are interested for oddset.conf to see DocumentRoot, ServerName directives.
+```  
+
+## redis useful
+```bash
+# flush from container
+$ docker exec -it igc-redis bash
+$ redis-cli -h redis -p 6379
+> flushall
+```  
+
+## Secure copy SCP (http://www.hypexr.org/linux_scp_help.php)
+```bash
+
+Copy the file "foobar.txt" from a remote host to the local host
+
+    $ scp your_username@remotehost.edu:foobar.txt /some/local/directory 
+
+Copy the file "foobar.txt" from the local host to a remote host
+
+    $ scp foobar.txt your_username@remotehost.edu:/some/remote/directory 
+
+Copy the directory "foo" from the local host to a remote host's directory "bar"
+
+    $ scp -r foo your_username@remotehost.edu:/some/remote/directory/bar 
+
+Copy the file "foobar.txt" from remote host "rh1.edu" to remote host "rh2.edu"
+
+    $ scp your_username@rh1.edu:/some/remote/directory/foobar.txt \
+    your_username@rh2.edu:/some/remote/directory/ 
+```  
+
+## Usefull Linux services
+xinetd: https://www.cyberciti.biz/faq/linux-how-do-i-configure-xinetd-service/  
+xinetd example: http://sysbible.org/2008/12/04/having-haproxy-check-mysql-status-through-a-xinetd-script/  
+
+## nslookup  
+
+https://medium.com/@jgefroh/demystifying-dns-for-web-developers-ace5a3ae559f  
+https://dougrathbone.com/blog/2012/03/03/devops-dns-for-developers-ndash-now-therersquos-no-excuse-not-to-know  
+
+<subdomain of subdomain>.<subdomain>.<domain>.<TLD>
+TLD: top level domain
+```bash  
+$ nslookup
+> atcom.gr
+... απάντηση εμφανίζοντας Α records
+> set type=CNAME
+> atcom.gr
+... απάντηση εμφανίζοντας CNAME records
+> set type=MX
+> atcom.gr
+... απάντηση εμφανίζοντας MX records
+
+# How do I check what DNS server is authorative for my domain name?
+> set type=NS
+> atcom.gr
+... απάντηση εμφανίζοντας NS records
+
+# show current DNS server, by default localhost
+> server
+
+# change to Google DNS server to get an external view
+> server 8.8.8.8
+```  
+
+
+
+
+
 
 
 
