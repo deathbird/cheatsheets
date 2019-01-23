@@ -39,3 +39,7 @@ https://www.sitepoint.com/php-authorization-jwt-json-web-tokens/
 PHP Authorization with JWT (JSON Web Tokens) tutorial  
 
 JWT, Php, tutorial  
+
+## Various tools
+https://github.com/google/tamperchrome  
+
