@@ -3,11 +3,6 @@
 ## PHP LIBS
 https://packagist.org/packages/moneyphp/money
 
-## USEFUL TOOLS
-https://github.com/google/tamperchrome
-
-
-
 ```php
 // format date time to update mysql field:
 $activeRecord->DtmField = date('Y-m-d G:i:s');
