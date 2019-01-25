@@ -9,4 +9,5 @@ Useful cheatsheets for devs.
 * [Php](https://github.com/deathbird/cheatsheets/blob/master/phpCheatsheet)
 * [Symfony 4](https://github.com/deathbird/cheatsheets/blob/master/symfony4Cheatsheet.md)
 * [node - npm](https://github.com/deathbird/cheatsheets/blob/master/node_npmCheatsheed.md)
+* [MySQL](https://github.com/deathbird/cheatsheets/blob/master/mysqlCheatsheet.md)
 
