@@ -1,6 +1,9 @@
 # Git Cheatsheet
 
 ## Useful Links
+https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet  
+http://ndpsoftware.com/git-cheatsheet.html   
+
 https://en.wikipedia.org/wiki/Version_control#Common_vocabulary  
 http://www.sitepoint.com/git-for-beginners/  
 http://www.sitepoint.com/getting-started-git-team-environment/  
@@ -12,9 +15,10 @@ http://www.sitepoint.com/whats-new-git-2-0
 https://try.github.io/levels/1/challenges/1  
 
 http://marklodato.github.io/visual-git-guide/index-en.html  
-http://ndpsoftware.com/git-cheatsheet.html  
 https://github.com/git-tips/tips#everyday-git-in-twenty-commands-or-so  
 https://learngitbranching.js.org/  
+https://www.atlassian.com/git/tutorials/refs-and-the-reflog
+
 
 ## Find file - text
 
