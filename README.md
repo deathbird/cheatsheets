@@ -7,6 +7,7 @@ Useful cheatsheets for devs.
 * [Linux CLI / Bash](https://github.com/deathbird/cheatsheets/blob/master/linuxCLICheatsheet.md)  
 * [Docker](https://github.com/deathbird/cheatsheets/blob/master/dockerCheatsheet.md)
 * [Php](https://github.com/deathbird/cheatsheets/blob/master/phpCheatsheet)
+* [Python](https://github.com/deathbird/cheatsheets/blob/master/pythonCheatsheet.md)
 * [Symfony 4](https://github.com/deathbird/cheatsheets/blob/master/symfony4Cheatsheet.md)
 * [node - npm](https://github.com/deathbird/cheatsheets/blob/master/node_npmCheatsheed.md)
 * [MySQL](https://github.com/deathbird/cheatsheets/blob/master/mysqlCheatsheet.md)
