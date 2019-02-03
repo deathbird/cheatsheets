@@ -128,4 +128,26 @@ The operators + and * each create a new list, leaving the original unchanged. A
 list’s methods are called by using attribute notation on the list itself: x.method
 (arguments)
 
+### Tuple
+Immutable! The operators ( in , + , and * ) and built-in functions ( len , max and min ) operate on them the same way as they do on lists. Index and slice notation work the same way for obtaining elements or slices but can’t be used to add, remove, or replace elements. Also, there are only two tuple methods: count and index.
+
+```python
+()
+# A one-element tuple needs a comma.
+(1,)
+(1, 2, 3, 4, 5, 6, 7, 8, 12)
+# A tuple, like a list, can contain a mixture of other types as its elements
+(1, "two", 3L, 4.0, ["a", "b"], (5, 6))
+
+# list can be converted to a tuple by using the built-in function tuple :
+>>> x = [1, 2, 3, 4]
+>>> tuple(x)
+(1, 2, 3, 4)
+
+# Conversely, a tuple can be converted to a list by using the built-in function list:
+>>> x = (1, 2, 3, 4)
+>>> list(x)
+[1, 2, 3, 4]
+```  
+
 
