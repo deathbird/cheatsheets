@@ -88,6 +88,12 @@ groups $USER
 
 # add user to group
 sudo usermod -aG docker <username>
+
+# display configuration system variables
+sudo sysctl -A | grep inotify
+
+# edit/add configuration system variables
+sudo vi /etc/sysctl.conf
 ```  
 
 ## sudo vs su
