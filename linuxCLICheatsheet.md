@@ -94,6 +94,7 @@ sudo sysctl -A | grep inotify
 
 # edit/add configuration system variables
 sudo vi /etc/sysctl.conf
+sudo sysctl -p --system  # apply changes and then restart your application(s) to get changed value(s).
 ```  
 
 ## sudo vs su
