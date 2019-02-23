@@ -74,6 +74,29 @@ set +o posix
 ## Various shell profile files useful for setting variables, aliases and functions
 TODO
 
+## Tricks
+* Press Ctrl+R for searching the shell history. Type in some characters and then Ctrl+R to search for similar text in the shell command history.
+* Use the history command to display the list of the previously executed shell commands
+* !! execute the previous command
+```bash
+# execute previous command
+!!
+# execute the 4th previous command from the history
+!-4
+# execute the 7th command in history
+!7
+# execute command with the previous command arguments
+cd /var/log
+ls !*
+# append previous command on the end of current command
+cat /etc/shadow
+sudo !!
+
+
+
+```
+
+
 ## BASH keyboard shortcuts
 
 https://ss64.com/bash/syntax-keyboard.html 
