@@ -28,6 +28,52 @@ https://www.2daygeek.com/count-check-apache-concurrent-connections-using-netstat
 ## Tools
 * [ShellCheck - finds bugs in your shell scripts](https://www.shellcheck.net/)  
 
+## Variables
+* Environment vars: Defined for the current shell and inherited by child shells and processes.
+* Shell vars: Contained exclusively in the shell that are defined.
+
+```bash
+# print all enviroment variables
+printenv
+
+# print specific env variable
+printenv SHELL
+echo $SHELL
+
+# show shell variables (may display also functions), use less to paginate
+set
+set | less
+
+# to not display functions
+set -o posix
+
+# set a variable VAR
+VAR=TEST
+
+# display variable VAR value
+set | grep VAR
+echo $VAR
+
+# Export a shell variable to the environment, becomes environment variable!
+export VAR
+
+# unset environment variable
+env -u VAR
+
+#unsert shell variable
+unset VAR
+
+#display shell options
+set -o
+
+#set on a shell option
+set +o posix
+
+```
+
+## Various shell profile files useful for setting variables, aliases and functions
+TODO
+
 ## BASH keyboard shortcuts
 
 https://ss64.com/bash/syntax-keyboard.html 
