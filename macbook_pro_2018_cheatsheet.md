@@ -2,6 +2,9 @@
 
 ## Keyboard usage
 
+Cmd+Space: Spotlight search
+Cmd+Delete: send file to trash
+
 Missing keys:  
 Home: fn + <-  
 End:  fn + ->
