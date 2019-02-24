@@ -2,8 +2,9 @@
 
 ## Keyboard usage
 
-Cmd+Space: Spotlight search
-Cmd+Delete: send file to trash
+Cmd+Space: Spotlight search  
+Cmd+Option+Esc: Force Quit an application
+Cmd+Delete: send file to trash  
 
 Missing keys:  
 Home: fn + <-  
