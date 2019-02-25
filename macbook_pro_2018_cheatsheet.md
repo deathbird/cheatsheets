@@ -3,19 +3,19 @@
 ## Keyboard usage
 
 Cmd+Space: Spotlight search  
-Cmd+Option+Esc: Force Quit an application
+Cmd+Option+Esc: Force Quit an application  
 Cmd+Delete: send file to trash  
 
 Missing keys:  
 Home: fn + <-  
-End:  fn + ->
+End:  fn + ->  
 Backspace: Delete key is used for backspace (delete to the left)  
-Delete: fn + Delete (delete to the right)
+Delete: fn + Delete (delete to the right)  
 
 ## Trackpad usage
 
-Scroll up/down: Swipe vertically up/down 2 fingers.
-Right-click: Click - Tap with 2 fingers.
+Scroll up/down: Swipe vertically up/down 2 fingers.  
+Right-click: Click - Tap with 2 fingers.   
 
 
 
