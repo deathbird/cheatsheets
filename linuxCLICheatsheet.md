@@ -667,17 +667,17 @@ $ nslookup
 
 ## vim
 
-Move around:
-H: Left
-J: Down
-K: Up
-L: Right
-w: start of next word
-e: end-of current word
-): end of current sentence
-(: start of current sententce
-}: end of current paragraph
-{: start of current paragraph
+Move around:  
+H: Left  
+J: Down  
+K: Up  
+L: Right  
+w: start of next word  
+e: end-of current word  
+): end of current sentence  
+(: start of current sententce  
+}: end of current paragraph  
+{: start of current paragraph  
 
 
 
