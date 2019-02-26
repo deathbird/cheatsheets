@@ -1,8 +1,8 @@
 # Macbook Pro 2008 tips for first time users
 
 ## Finder
-Move file/folder: Cmd+C to copy and then Cmd+Option+V to move to other folder
-Copy + Paste file/folder: Cmd+C and then Cmd+V
+Move file/folder: Cmd+C to copy and then Cmd+Option+V to move to other folder  
+Copy + Paste file/folder: Cmd+C and then Cmd+V  
 
 ## Keyboard usage
 
