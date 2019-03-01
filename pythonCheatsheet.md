@@ -150,4 +150,24 @@ Immutable! The operators ( in , + , and * ) and built-in functions ( len , max a
 [1, 2, 3, 4]
 ```  
 
+### Debugging
+Use pdb or even better ipdb. For async handling (eg celery) use rdb.
+```python
+import ipdb
+ipdb.set_trace()
 
+from celery.contrib import rdb
+rdb.set_trace() 
+
+# pdb sample commands
+# s (step into)
+# n (step over)
+# r (return - step out of function)
+# c (run to end)
+```  
+pdb docs: https://docs.python.org/3.6/library/pdb.html#pdbcommand-return  
+ipdb docs: https://pypi.org/project/ipdb/  
+
+### Mocking
+https://docs.python.org/3/library/unittest.mock.html#module-unittest.mock  
+ 
