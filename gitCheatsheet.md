@@ -193,11 +193,21 @@ git revert ...
 # ABORT MERGE!!!!!  
 git merge --abort  
 
+https://help.github.com/en/articles/changing-a-commit-message
 #(amend last commit comment BEFORE PUSHING)  
 git commit --amend  
 
 #(amend last commit message comment BEFORE PUSHING)  
 git commit --amend -m "New commit message for previous commit."  
+
+# amend a freshly pushed commit (eg noone has pulled the commit or pushed as a Pull Request)
+git commit --amend  # to amend locally
+git push --force    # to force pushing to remote
+
+# Amending the message of older or multiple commit messages
+git rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branch
+# Replace pick with reword before each commit message you want to change and then push ...
+git push --force
 
 # return back origin to previous commit 
 # -------------------------------------
