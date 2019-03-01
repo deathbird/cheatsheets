@@ -2,6 +2,7 @@
 
 ## Links
 * [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
+* [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
 
 ## Geting help on CLI (or IDLE)
 
