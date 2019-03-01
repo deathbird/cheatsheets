@@ -1,5 +1,8 @@
 # Python Cheatsheet
 
+## Links
+* [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
+
 ## Geting help on CLI (or IDLE)
 
 ```python
