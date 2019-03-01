@@ -679,6 +679,8 @@ e: end-of current word
 }: end of current paragraph  
 {: start of current paragraph  
 
+Show lines/columns indication in status-bar:
+:set ruler
 
 
 
