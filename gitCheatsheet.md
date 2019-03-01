@@ -254,6 +254,10 @@ git remote -v #(verbose, show remote repo)
 
 git remote show [remote-name]  # (eg. git remote show origin)
 
+git remote remove myOrigin     # remove myOrigin remote
+
+# add a remote
+git remote add origin ssh://git@example.com:1234/myRepo.git  
 ```
 
 ## stashing
