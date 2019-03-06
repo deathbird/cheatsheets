@@ -18,6 +18,7 @@ http://marklodato.github.io/visual-git-guide/index-en.html
 https://github.com/git-tips/tips#everyday-git-in-twenty-commands-or-so  
 https://learngitbranching.js.org/  
 https://www.atlassian.com/git/tutorials/refs-and-the-reflog
+https://www.ocpsoft.org/tutorials/git/use-reflog-and-cherry-pick-to-restore-lost-commits/
 
 
 ## Find file - text
