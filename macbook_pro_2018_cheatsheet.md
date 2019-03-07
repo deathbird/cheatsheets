@@ -8,7 +8,10 @@ Copy + Paste file/folder: Cmd+C and then Cmd+V
 
 Cmd+Space: Spotlight search  
 Cmd+Option+Esc: Force Quit an application  
-Cmd+Delete: send file to trash  
+Cmd+Delete: send file to trash 
+Ctrl+Up arrow: Mission Control
+Fn+F11: Desktop Show
+Cmd+Shift+4: Snapshot with screen selection, press Spacebar to capture whole screen
 
 Missing keys:  
 Home: fn + <-  
