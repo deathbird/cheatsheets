@@ -302,6 +302,36 @@ $ git checkout master
 $ git merge experiment  
 ```
 
+* Change previous commit(s) adding files or commit. It's done with an interactive rebase:
+https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
+
+```bash
+# stash changes
+➜ git stash
+# get back to the parent of the commit you want to edit, eg go back 2 commits
+➜ git rebase -i HEAD~2
+# you are dropped in VI, choose EDIT (edit) to the commits you want to modify!!!
+# then save the file
+Stopped at 23d33cd...  Fix synching finds more translation files
+You can amend the commit now, with
+
+  git commit --amend '-S'
+
+Once you are satisfied with your changes, run
+
+  git rebase --continue
+
+
+# Add / Change files from the commit here 
+➜ git stash pop
+# add files to staging area and commit
+➜ git commit --amend '-S'
+# then continue the rebase 
+➜ Git Rebase --continue
+# finally force push to PR
+➜ git push -f
+```
+
 ## tags
 ```bash
 git tag  # show all tags
