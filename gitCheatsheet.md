@@ -271,7 +271,16 @@ git stash list
 git stash pop   # apply the last stash and remove it from stash list  
 
 git stash apply # apply the last stash and KEEP it in stash list  
-git stash apply stash@{2}  
+git stash apply stash@{2}
+
+#To show files changed in the last stash
+git stash show
+
+#To view the content of the most recent stash, run
+git stash show -p
+
+#To view the content of an arbitrary stash, run something like
+git stash show -p stash@{1}
 ```
 
 ## rebase
