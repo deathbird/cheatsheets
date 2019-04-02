@@ -201,8 +201,8 @@ git commit --amend
 #(amend last commit message comment BEFORE PUSHING)  
 git commit --amend -m "New commit message for previous commit."  
 
-# amend a freshly pushed commit (eg noone has pulled the commit or pushed as a Pull Request)
-git commit --amend  # to amend locally
+# amend/add files to a freshly pushed commit (eg noone has pulled the commit or pushed as a Pull Request)
+git commit --amend --no-edit # to amend locally without editing commit message (no-edit)
 git push --force    # to force pushing to remote
 
 # Amending the message of older or multiple commit messages
