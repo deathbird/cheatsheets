@@ -384,6 +384,14 @@ done
 * Show all commits after a given commit and HEAD:  
 `git rev-list 090cb257b5b..HEAD`
 
+* Retrieve lost commit message. The commit message is stored in .git/COMMIT_EDITMSG. After a "failed" committing attempt, you could run:
+
+```bash
+git commit --edit --file=.git/COMMIT_EDITMSG
+# shorter syntax
+git commit -eF .git/COMMIT_EDITMSG
+```
+
 * make-the-current-commit-the-only-initial-commit-in-a-git-repository:  
 http://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-initial-commit-in-a-git-repository
 
