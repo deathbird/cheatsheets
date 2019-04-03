@@ -1,7 +1,7 @@
 # Python Cheatsheet
 
 ## Links
-* [Pyenv, virtualenvwrapper, etc setup guide](https://gist.github.com/wronk/a902185f5f8ed018263d828e1027009b]
+* [Pyenv, virtualenvwrapper, etc setup guide](https://gist.github.com/wronk/a902185f5f8ed018263d828e1027009b)
 * [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 * [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
 
@@ -10,13 +10,6 @@
 # Check if a PIP package is installed
 pip show virtualenv
 
-# Check all items of a list:
-all(isinstance(x, (int, long)) for x in lst)
-
-# * pytest: How to execute ipdb.set_trace() at will while running pytest tests
-# You should run py.test with -s option (turn off capture output). For example:
-py.test -s my_test.py
-
 ```
 ## Various tips
 ```python
@@ -24,7 +17,12 @@ py.test -s my_test.py
 if not a:
   print('list is empty')
   
+# Check all items of a list:
+all(isinstance(x, (int, long)) for x in lst)
 
+# * pytest: How to execute ipdb.set_trace() at will while running pytest tests
+# You should run py.test with -s option (turn off capture output). For example:
+py.test -s my_test.py
 ```
 
 
