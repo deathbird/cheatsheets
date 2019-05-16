@@ -89,7 +89,18 @@ git checkout -b [branch_name] [commit_hash]
 git push [remote] --delete [branch_name]  # delete a branch from a remote  
 git push [remote] :[branch_name]		  # delete a branch from a remote  
 git branch -D [branch_name]               # delete local branch irrespective of its merged status  
-git remote prune [remote]				  # prune stale (deleted but not garbage collected?) branches from [remote]  
+git remote prune [remote]				  # prune stale (deleted but not garbage collected?) branches from [remote]
+
+# Renaming <old_name> Git Branch to <new_name>
+# Checkout old branch:
+git checkout <old_name>
+# Rename the local branch by typing:
+git branch -m <new_name>
+#If you’ve already pushed the <old_name> branch to the remote repository delete the <old_name> remote branch:
+git push origin --delete <old_name>
+#Finally push the <new_name> local branch and reset the upstream branch
+git push origin -u <new_name>
+
 ``` 
 
 ## merge
