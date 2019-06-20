@@ -292,6 +292,9 @@ git stash show -p
 
 #To view the content of an arbitrary stash, run something like
 git stash show -p stash@{1}
+
+#Since git 2.13, there is a command to save a specific path to the stash:
+git stash push -m stash_description path/to/file.json
 ```
 
 ## rebase
