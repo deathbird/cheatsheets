@@ -355,7 +355,7 @@ Once you are satisfied with your changes, run
 ➜ git push -f
 ```
 
-* Splitting git Commits
+* Splitting commits (https://embeddedartistry.com/blog/2018/2/19/code-cleanup-splitting-up-git-commits-in-the-middle-of-a-branch):
 Here's how I approach splitting up a git commit buried in the middle of a branch:
 
 1. Checkout the branch that you want to modify (e.g. pj/feature)
