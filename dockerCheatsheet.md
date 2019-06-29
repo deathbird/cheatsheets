@@ -13,6 +13,9 @@ docker build -t ouruser/sinatra:v2 .	# build an image out of a Dockerfile in the
 
 [sudo] docker [subcommand] [flags] [arguments] ..
 
+# copy a file from a container (txgit_txgit_1) path to a host path!
+docker cp txgit_txgit_1:/tmp/payload_many.txt ~/.
+
 docker start <port_name> # restarts a previously stopped container
 docker restart <port_name>	# restarts (stop+start) a running container
 docker attach --help	# help for attach sub-command
