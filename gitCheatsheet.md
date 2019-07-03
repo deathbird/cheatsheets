@@ -216,6 +216,18 @@ git commit --amend -m "New commit message for previous commit."
 git commit --amend --no-edit # to amend locally without editing commit message (no-edit)
 git push --force    # to force pushing to remote
 
+# remove unwanted file(s) from git commit:
+# moving the mistakenly committed files back to the staging area from the previous commit, 
+# without cancelling the changes done to them.
+# 1.
+git reset --soft HEAD^ 
+# 1. (alternative)
+git reset --soft HEAD~1
+# 2. Then reset the unwanted files in order to leave them out from the commit:
+git reset HEAD path/to/unwanted_file
+# 3. Now commit again, you can even re-use the same commit message:
+git commit -c ORIG_HEAD 
+
 # Amending the message of older or multiple commit messages
 git rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branch
 # Replace pick with reword before each commit message you want to change and then push ...
