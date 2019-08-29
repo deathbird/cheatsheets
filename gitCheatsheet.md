@@ -189,6 +189,10 @@ git reset --soft HEAD~1
 # If you don't want to keep these changes, simply use the --hard flag
 git reset --hard HEAD~1
 
+# TURN BACK TIME!!!!! Use reflog to inspect all past history and turn back to a point in history ;)
+git reflog
+git reset --hard HEAD@{5}
+
 # DELETE LAST LOCAL COMMIT:
 git reset HEAD~  ή git reset HEAD^ --hard
 
