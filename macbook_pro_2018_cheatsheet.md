@@ -2,7 +2,8 @@
 
 ## Finder
 Move file/folder: Cmd+C to copy and then Cmd+Option+V to move to other folder  
-Copy + Paste file/folder: Cmd+C and then Cmd+V  
+Copy + Paste file/folder: Cmd+C and then Cmd+V
+Toggle hidden files: Cmd+Shift+.
 
 ## Keyboard usage
 
