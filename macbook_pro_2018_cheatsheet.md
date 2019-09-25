@@ -22,7 +22,18 @@ Delete: fn + Delete (delete to the right)
 ## Trackpad usage
 
 Scroll up/down: Swipe vertically up/down 2 fingers.  
-Right-click: Click - Tap with 2 fingers.   
+Right-click: Click - Tap with 2 fingers.
 
+## brew
+```
+# show installed formulas
+brew list
+
+# show info about a formula
+brew info python
+
+# show available commands
+brew commands
+```
 
 
