@@ -5,6 +5,14 @@
 * [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 * [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
 
+## virtualenvwrapper
+```
+# using the above 1st link for pyenv, virtualenvwrapper etc installation use the -p switch with the
+# python version set by pyenv locally (omit minor .4 suffix) to correctly create the virtual env.
+pyenv local 3.7.4
+mkvirtualenv -p python3.7 jdi_flask_test
+```
+
 ## PIP
 ```bash
 # Check if a PIP package is installed
