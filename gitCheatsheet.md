@@ -100,7 +100,8 @@ git branch -m <new_name>
 git push origin --delete <old_name>
 #Finally push the <new_name> local branch and reset the upstream branch
 git push origin -u <new_name>
-
+# Overwrite branch contents (force) from other branch and push (overwrite hotfixes with master)
+git push origin +master:hotfixes
 ``` 
 
 ## merge
