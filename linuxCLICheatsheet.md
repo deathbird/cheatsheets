@@ -56,6 +56,8 @@ echo $VAR
 
 # Export a shell variable to the environment, becomes environment variable!
 export VAR
+# or more short version of set and export in one step
+export VAR=TEST
 
 # unset environment variable
 env -u VAR
@@ -68,6 +70,28 @@ set -o
 
 #set on a shell option
 set +o posix
+
+```
+
+## Scripting tips
+```
+# execute a command with setting some env variables before-hand
+TRANSIFEX_TOKEN=***** \
+TRANSIFEX_PROJECT=txclie \
+TRANSIFEX_USER=test_client \
+TX_HOST=http://tx.loc:8000 \
+TX_CLONE_FOLDER=txci_folder \
+RANDOM=123 \
+bash -c "/Users/jack_dimas/tx/transifex-client/contrib/tx_commands.sh"
+
+# Exit script on fail
+set -e
+
+# Retrying logic to execute a command that might fail with a sleep timeout in secs in between tries.
+# Note the use of && break to break out of the loop on success and || operator to execute sleep on error.
+# Also note that the previous set -e command has no influence in this compound command (we effectively
+# catch the error and retry)!!!
+for i in 1 2 3 4; do echo "Attempt to execute command..."; <command here> && break || sleep 20; done
 
 ```
 
