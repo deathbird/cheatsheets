@@ -1,7 +1,7 @@
 # Linux / Bash CLI Cheatsheet 
 
-** You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
-and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal. **
+**You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
+and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal.**
 
 
 ## Links
@@ -74,6 +74,17 @@ set +o posix
 ```
 
 ## Scripting tips
+**Difference of ${} vs $()**
+The expression $(command) is a modern synonym for `command` which stands for command substitution; it means, run command and put its output here. So
+```
+echo "Today is $(date). A fine day."
+```
+will run the date command and include its output in the argument to echo.
+
+By contrast, ${variable} is just a disambiguation mechanism, so you can say ${var}text when you mean, the contents of the variable var, followed by text (as opposed to $vartext which means, the contents of the variable vartext).
+
+REMEMBER TO ALWAYS **use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal.**
+
 ```
 # execute a command with setting some env variables before-hand
 TRANSIFEX_TOKEN=***** \
