@@ -4,6 +4,9 @@ Documenting software installations on an Dell XPS-13-9380 with Ubuntu 18.04 LTS.
 
 For all s/w cloned from repos we use folder:  **~/cloned_software**
 
+## Install pyenv + pyenv-virtualenv to manage Python virt. envs
+...
+
 ## Install Solarized theme in Gnome terminal
 
 * Installed under ~/cloned_software
