@@ -21,7 +21,7 @@ https://www.atlassian.com/git/tutorials/refs-and-the-reflog
 https://www.ocpsoft.org/tutorials/git/use-reflog-and-cherry-pick-to-restore-lost-commits/
 
 
-## Find file - text
+## Find file - text - search log
 
 show in which commits a file changed  
 `git log --follow Models/Widget/Content/Content.php`
@@ -33,8 +33,14 @@ show all files commited on a specific commit
 `git diff-tree --no-commit-id --name-only -r bd61ad98`
 
 Search commit log across all branches for given text  
-`git log --all --grep='<given-text>'  
+`git log --all --grep='<given-text>'
 `  
+
+```
+# find all commits for given author (name is case sensitive), match is with like operator
+# Add --all if you intend to search all branches and not just the current commit's ancestors in your repo.
+git log --author=Dimas
+```
 
 ## push
 ```bash
