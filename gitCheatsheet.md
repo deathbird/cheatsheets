@@ -108,6 +108,31 @@ git push origin --delete <old_name>
 git push origin -u <new_name>
 # Overwrite branch contents (force) from other branch and push (overwrite hotfixes with master)
 git push origin +master:hotfixes
+
+# Rebasing on another branch
+# Will rebase a feature on devel branch:
+# A_B_C_D_E      <-(devel)
+#        \_F_G_H <-(feature)
+# After rebase:
+# A_B_C_D_E_F_G_H  <-(feature)
+git checkout devel
+git pull
+git checkout feature
+git rebase devel
+# alternatively, if not in feature branch the following checks out
+# automatically feature branch to do a rebase on it.
+git rebase devel feature
+
+# Rebasing on another branch with --onto
+# Will rebase a branch2 on devel branch:
+# A_B_C_D_E           <-(devel)
+#        \_F_G_H      <-(branch1)
+#             \_K_L_M <-(branch2)
+# After rebase:
+# A_B_C_D_E           <-(devel)
+#        \ \_K_L_M    <-(branch2)
+#         \_F_G_H     <-(branch1)
+git rebase --onto devel branch1 branch2
 ``` 
 
 ## merge
