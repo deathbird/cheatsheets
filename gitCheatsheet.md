@@ -92,6 +92,9 @@ git checkout --track [remote]/[a_remote_branch]
 # (create a branch based on an old commit append the hash that identifies a commit with the command.)  
 git checkout -b [branch_name] [commit_hash]  
 
+# replace local branch with remote version of branch
+git reset --hard [remote]/[branch_name]
+
 git push [remote] --delete [branch_name]  # delete a branch from a remote  
 git push [remote] :[branch_name]		  # delete a branch from a remote  
 git branch -D [branch_name]               # delete local branch irrespective of its merged status  
