@@ -136,18 +136,44 @@ sudo !!
 
 https://ss64.com/bash/syntax-keyboard.html 
 https://clementc.github.io/blog/2018/01/25/moving_cli/
+In the following C - <keyboard key> means pressing Ctrl key And <keyboard key> together.
+	
+C - d : exit  
+C - l : clear screen above current line  
+C - [ : Equivalent to ESC key.  
+C - V : Makes the next character typed verbatim  
+C - X : Lists the possible filename completions of the current word.  
 
-Ctrl + D : exit
-CTRL + A : goto start of line  
-CTRL + E : goto end of line  
-CTRL + L : clear screen above current line 
-CTRL + R : search command history recursively  
-Ctrl + o   Execute the command found via Ctrl+r or Ctrl+s  
-Ctrl + g   Escape from history searching mode  
-Ctrl + U : cut from cursor to START of line also clearing all the line if you are at line end  
-Ctrl + W : cut from cursor to START of word also clearing all the line if you are at line end  
-Ctrl + K : cut from cursor to END of line also clearing all the line if you are at line start  
-Ctrl + Y : paste  
+Movement:  
+C - a : goto start of line  
+C - e : goto end of line  
+C - f : Move forward one character  
+C - B : To move backward one character  
+C - XX : Move between start of command line and current cursor position (and back again).  
+
+Editing:  
+C - D : Delete one character backward  
+C - H : Delete the characters before the cursor, same as BASKSPACE.  
+C - K : Delete all characters after the cursor  
+C - u : cut from cursor to START of line also clearing all the line if you are at line end  
+C - w : cut from cursor to START of word also clearing all the line if you are at line end  
+C - k : cut from cursor to END of line also clearing all the line if you are at line start  
+C - y : paste  
+C - T : Swaps the last two characters.  
+
+
+History:  
+C - r : search command history recursively  
+C - o   Execute the command found via C - r or C - s  
+C - g   Escape from history searching mode  
+C - N : Display next line in command history.  
+C - P : Displays the previous line in command history.  
+C - S : Searches the history forward.  
+
+Commands:  
+C - C : Stop the currently running command  
+C - J / C - M : Same as ENTER/RETURN key.  
+C - Z : Stops the current command.  
 
 Use !! to prefix to the last command:  
 sudo !!  
