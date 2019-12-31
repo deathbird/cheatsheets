@@ -60,8 +60,10 @@ sudo docker-compose up --build -d
 # Start ALL docker containers and see output:
 sudo docker-compose up
 
-# Start docker container , as user 1000, and see output:
+# Start docker container as user 1000, and see output:
 sudo docker exec -it --user 1000 igc-web bash
+# Start docker container as root, and see output:
+sudo docker exec -it --user root txc-web bash
 
 # Build container again if configuration is changed????:
 sudo docker-compose up --build  nodejs
@@ -78,5 +80,70 @@ sudo docker images
 
 ```
 
+# Network
+
+You can also use ping or telnet to troubleshoot network connectivity issues!!
+```
+docker network ls
+
+# Docker runs an internal DNS server configured automatically for containers that is available at 127.0.0.11 from within a container
+ping -c 2 127.0.0.1
+
+# to configure the DNS upstream resolution for a container
+# —dns flag set the DNS upstream resolver for a container (if not configured uses Google’s public DNS servers)
+# —dns-search flag sets the search domain for containers, lookups for host 1 will also lookup for host 1.example.com
+>docker container run -it —dns=192.168.1.1 —dns-search=“example.com” —name=bb busybody:1.26
+
+# to configure dns globally locate daemon.json (better through Docker Desktopt UI in Mac, Preferences > Daemon
+# or (?) in ~/.docker/daemon.json file and the restart docker daemon to take effect!
+{
+    “dns” : [“192.168.1.1”, “192.168.1.2”],
+    “dns-search” : “example.com”
+}
+
+# User-defined bridge networks are the preferred way to allow containers to connect to each other.
+# By default containers in separate networks are isolated from each other.
+# Docker provides DNS service discovery based on container’s name or network alias
+# DNS service discovery is not available at the default bridge network -> must build custom bridge network!!!
+
+# create 2 custom bridge networks to test connectivity:
+docker network create --driver bridge frontend
+docker network create --driver bridge backend
+docker network ls
+
+# now create two containers for each network, front runs in network frontend etc.
+docker container run -it -d --network=frontend --name=front busybox:1.26
+docker container run -it -d --network=backend --name=back busybox:1.26
+# also create a 3rd container to test connectivity
+docker container run -it -d --network=frontend --name=test busybox:1.26
+
+# test isolation
+docker attach test
+/ # ping -c 2 front
+PING front (172.25.0.2): 56 data bytes
+64 bytes from 172.25.0.2: seq=0 ttl=64 time=0.291 ms
+
+/ # ping -c 2 back
+ping: bad address 'back'
+
+# now we can add dynamically the container test to the backend network! On the host:
+docker network connect backend test
+
+~
+➜ docker attach test
+/ # ping -c 2 back
+PING back (172.26.0.2): 56 data bytes
+64 bytes from 172.26.0.2: seq=0 ttl=64 time=0.359 ms
+```
+
+# Alpine image
+```
+# install package on alpine image:
+# 1. connect to the container as root user
+docker exec -it --user root <container> bash
+# 2. install the telnet package through apk:
+apk update
+apk add busybox-extras
+```
 
 
