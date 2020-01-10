@@ -75,8 +75,12 @@ git checkout -b r-2.0.0/qa --track origin/r-2.0.0/qa
 git branch -a   # (show all local and remote brances!)  
 git branch -r   # (show ONLY remote brances!)  
 git branch -u origin/r-3.0.0/feature/IGC-479  # (set current local branch to track remote - upstream branch, -u: upstream)  
+# display local to remote (upstream) branch mapping!
+git branch -vv   # doubly verbose!
+
 
 # (To create a new branch from current HEAD and switch to it immediately, use:)  
+
 # new branch points to current branch HEAD  
 git checkout -b [new_branch_name]  
 
@@ -105,8 +109,8 @@ git remote prune [remote]				  # prune stale (deleted but not garbage collected?
 git checkout <old_name>
 # Rename the local branch by typing:
 git branch -m <new_name>
-#If you’ve already pushed the <old_name> branch to the remote repository delete the <old_name> remote branch:
-git push origin --delete <old_name>
+#If you’ve already pushed the <old_name> branch to the remote repository delete the <old_name> remote branch with new_name:
+git push origin :<old_name> <new_name>
 #Finally push the <new_name> local branch and reset the upstream branch
 git push origin -u <new_name>
 # Overwrite branch contents (force) from other branch and push (overwrite hotfixes with master)
