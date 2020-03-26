@@ -75,6 +75,7 @@ git checkout -b r-2.0.0/qa --track origin/r-2.0.0/qa
 git branch -a   # (show all local and remote brances!)  
 git branch -r   # (show ONLY remote brances!)  
 git branch -u origin/r-3.0.0/feature/IGC-479  # (set current local branch to track remote - upstream branch, -u: upstream)
+git branch --unset-upstream # to remove the tracking to the remote branch
 # Simply delete your remote tracking branch (this will not delete the branch on the remote repo!):
 git branch -d -r origin/<remote branch name> 
 # display local to remote (upstream) branch mapping!
