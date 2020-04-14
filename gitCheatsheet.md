@@ -132,6 +132,8 @@ git rebase devel
 # alternatively, if not in feature branch the following checks out
 # automatically feature branch to do a rebase on it.
 git rebase devel feature
+# to rebase over a remote <origin> <remote_ref: branch, tag, etc> :
+git pull --rebase <origin> <remote_ref>
 
 # Rebasing on another branch with --onto
 # Will rebase a branch2 on devel branch:
