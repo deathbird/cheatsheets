@@ -204,6 +204,11 @@ from os import getcwd
 # current dir
 print(getcwd())
 
+# uses alias to shorten name
+import a_ridiculously_long_module_name as short_name
+# also works for
+import module.submodule.subsubmodule as short_name
+
 # Default “module”
 # All global (variable/function) names in Python are considered to be in the pseudo-module namespace named __main__.
 print(dir())
@@ -220,7 +225,37 @@ pprint.pprint(sys.path)
 
 # List Loaded Modules
 #   Loaded module names is stored in the variable sys.modules.
+import sys
 pprint.pprint(sys.modules)
+
+# The super-weapon!!! Use the following to force python 2 code
+# to use absolute imports resolution ie
+# switch import's behaviour to absolute imports
+# https://docs.python.org/2.5/whatsnew/pep-328.html
+# https://stackoverflow.com/questions/33743880/what-does-from-future-import-absolute-import-actually-do
+from __future__ import absolute_import
+
+# Take for example this structure
+# SWS/
+#   __init.py__
+#   foo.py
+#   bar.py
+#   time.py
+#
+# in python 2:
+import time # will refere to SWS.time module due to the semantics of 
+# import in ancient python versions (2.x). To fix it add:
+from __future__ import absolute_import # will change the semantics of import to that of python3.x
+# and will only refer to the top-level time module 
+
+# to import a module in our package we use
+# Using an explicit relative import
+from . import time
+# Or using an absolute import:
+import SWS.time as time
+
+# also refer to this hack to resolve name collisions
+# https://stackoverflow.com/questions/28590568/how-solve-module-name-collision-in-python
 ```
 
 ## Geting help on CLI (or IDLE)
@@ -272,4 +307,27 @@ print(dir(re))
 
 ## Mocking
 https://docs.python.org/3/library/unittest.mock.html#module-unittest.mock
+
+## Various
+```python
+# https://github.com/transifex/django-txdata/pull/1097/files
+# python version string compatibility handling
+        if not isinstance(jwt_token, six.string_types):
+            return jwt_token.decode('utf-8')
+        else:  # pragma: no cover
+            return jwt_token
+            
+
+# alternate way
+import six
+
+if six.PY3:
+    unicode_compat = str
+else:
+    unicode_compat = unicode
+    
+# client code using the above (maybe in some other module):
+return unicode_compat(some_string_variable)
+
+```
 
