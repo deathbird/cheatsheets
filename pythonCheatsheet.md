@@ -34,24 +34,7 @@ py.test -s my_test.py
 ```
 
 
-## Geting help on CLI (or IDLE)
 
-```python
-# get into the help system and then get help on modules, keywords or topic.
->>>help()
-
-# get help on specific symbol, function etc
->>>x = 2
->>>help(x)
-
-# list the object of a namespace
->>>dir()  # list current globals
->>>dir(int)
-
-# show objects associated with globals and locals
->>>globals()
->>>locals()
-```  
 ## Built-in data types
 
 ### Numbers
@@ -184,7 +167,7 @@ Immutable! The operators ( in , + , and * ) and built-in functions ( len , max a
 [1, 2, 3, 4]
 ```  
 
-### Debugging
+## Debugging
 Use pdb or even better ipdb. For async handling (eg celery) use rdb.
 ```python
 import ipdb
@@ -202,6 +185,91 @@ rdb.set_trace()
 pdb docs: https://docs.python.org/3.6/library/pdb.html#pdbcommand-return  
 ipdb docs: https://pypi.org/project/ipdb/  
 
-### Mocking
-https://docs.python.org/3/library/unittest.mock.html#module-unittest.mock  
- 
+## Inspect state - find help
+globals() — Return a dictionary representing the current global symbol table. This is always the dictionary of the current module (inside a function or method, this is the module where it is defined, not the module from which it is called):
+```
+import pprint
+pprint.pprint(globals())
+```
+
+## modules - packages
+```python
+import os   # load a module.
+os.getcwd() # call a function in module.
+
+# Module's function name can be imported directly by the syntax:
+#    from module_name import name_1, name_2, … → import several functions.
+#    from module_name import * → import all functions (avoid it generally)
+from os import getcwd
+# current dir
+print(getcwd())
+
+# Default “module”
+# All global (variable/function) names in Python are considered to be in the pseudo-module namespace named __main__.
+print(dir())
+# ['__annotations__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__']
+
+print(dir("__main__"))
+
+# Module Search Paths
+# Python module search paths is stored in the variable sys.path.
+import sys
+import pprint
+# pretty print module search paths
+pprint.pprint(sys.path)
+
+# List Loaded Modules
+#   Loaded module names is stored in the variable sys.modules.
+pprint.pprint(sys.modules)
+```
+
+## Geting help on CLI (or IDLE)
+
+CLI:
+```bash
+# use pydoc, the python documentation
+pydoc <name>
+# Search for a keyword in the synopsis lines of all available modules
+pydoc -k <keyword>
+# Pop up a graphical interface for finding and serving documentation.
+pydoc -g
+```
+
+```python
+# get into the help system and then get help on modules, keywords or topic.
+>>>help()
+
+# get help on specific symbol, function, object etc
+>>>x = 2
+>>>help(x)
+
+import os
+help(os)
+
+# To list all modules
+help('modules')
+
+# List Module's Function/Variable Names
+dir(module_name)  # list all names exported by the module module_name.
+# list all names in current scope (but not standard functions).
+dir()  
+# To list standard functions
+import __builtin__ 
+dir(__builtin__)
+
+# print all names exported by the module
+import re
+print(dir(re))
+
+# list the object of a namespace
+>>>dir()  # list current globals
+>>>dir(int)
+
+# show objects associated with globals and locals
+>>>globals()
+>>>locals()
+```
+
+## Mocking
+https://docs.python.org/3/library/unittest.mock.html#module-unittest.mock
+
