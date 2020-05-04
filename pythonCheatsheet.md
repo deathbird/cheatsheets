@@ -328,6 +328,11 @@ else:
     
 # client code using the above (maybe in some other module):
 return unicode_compat(some_string_variable)
+```
+
+```bash
+# How do I remove all .pyc files (python bytecode) from a project?
+find . -name "*.pyc" -exec rm -f {} \;
 
 ```
 
