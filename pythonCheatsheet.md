@@ -328,6 +328,10 @@ else:
     
 # client code using the above (maybe in some other module):
 return unicode_compat(some_string_variable)
+
+# log to stdout, if no logger provided
+import sys
+sys.stdout.write("blah")
 ```
 
 ```bash
