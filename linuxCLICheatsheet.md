@@ -320,8 +320,13 @@ sudo yum install php55w php55w-opcache php55w-cli php55w-common php55w-gd php55w
 # list only hidden files  
 $ ls -ld .?*  
 
-# unzip *.tar.gz  
-$ tar -xzf file1.tar.gz  
+# Create and extract a .tar.gz archive using command line
+# create a tar.gz archive from a given folder you can use the following command
+tar -zcvf tar-archive-name.tar.gz source-folder-name.
+# extract - unzip a tar.gz compressed archive you can use the following command. 
+tar -zxvf tar-archive-name.tar.gz.
+# list files in tar.gz file
+tar -tvf tar-archive-name.tar.gz.
 
 # unzip *.gz  
 $ gunzip file1.gz  
