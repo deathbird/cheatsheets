@@ -218,6 +218,17 @@ git config --global --edit
 ## UNDO!!!!
 
 ```bash
+git reset --hard # removes staged and working directory changes
+
+## !! be very careful with these !!
+## you may end up deleting what you don't want to
+## read comments and manual.
+git clean -f -d # remove untracked
+git clean -f -x -d # CAUTION: as above but removes ignored files like config.
+# CAUTION: as above, but cleans untracked and ignored files through the entire 
+# repo (without :/, the operation affects only the current directory)
+git clean -fxd :/ 
+
 # Usage with path specifier (dot matches all files)   
 # https://stackoverflow.com/questions/14460595/git-checkout-with-dot  
 # If you want to revert changes made to the index (i.e., that you have added). It undoes unstaged local modification.  
@@ -286,6 +297,13 @@ git push --force
 git reset --hard f0fcac15ae4ed32fa3038ab2a7f1fdf91dc9e8e7  # 1. reset local branch to a previous good commit
 git push [remote] :[branch_name]		  # 2. delete the same branch from the remote
 git push origin STAGING					  # 3. push again corrected branch to remote!!!
+
+# master branch has new direct contributions (not through devel branch)
+# so the 2 branches have diverged and we need to refresh devel branch 
+# with what's in master. Let's say last master branch commit is <hash_master_br>
+git checkout devel
+git update-ref HEAD <hash_master_br>
+git push -f
 
 ```  
 
