@@ -308,6 +308,9 @@ docker top <container_name>
 docker stats [options]
 # extract from inspect’s json output a specific node!!!
 docker inspect <container_name> | jq “[].Mounts”
+
+# update a container's restart policy
+docker update --restart=no <container_id>
 ```
 
 # Various
