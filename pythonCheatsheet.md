@@ -4,6 +4,7 @@
 * [Pyenv, virtualenvwrapper, etc setup guide](https://gist.github.com/wronk/a902185f5f8ed018263d828e1027009b)
 * [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 * [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
+* [PyCharm guide](https://realpython.com/pycharm-guide/#searching-and-navigating-in-pycharm)
 
 ## virtualenvwrapper
 ```
