@@ -5,6 +5,7 @@
 * [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 * [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
 * [PyCharm guide](https://realpython.com/pycharm-guide/#searching-and-navigating-in-pycharm)
+* [Understanding slice notation](https://stackoverflow.com/questions/509211/understanding-slice-notation)
 
 ## virtualenvwrapper
 ```
