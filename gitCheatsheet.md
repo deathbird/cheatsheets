@@ -51,6 +51,7 @@ git push [remote]
 
 git push [remote] [branch]
 
+# overwrite remote branch with local
 # (you can push from a local branch to a branch by a different name on the remote)
 git push [remote] [local_branch]:[remote_branch]
 
@@ -116,6 +117,9 @@ git branch -m <new_name>
 git push origin :<old_name> <new_name>
 #Finally push the <new_name> local branch and reset the upstream branch
 git push origin -u <new_name>
+
+# overwrite remote branch with local
+git push [remote] [local_branch]:[remote_branch]
 # Overwrite branch contents (force) from other branch and push (overwrite hotfixes with master)
 git push origin +master:hotfixes
 
