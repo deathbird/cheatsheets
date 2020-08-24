@@ -225,6 +225,12 @@ sudo sysctl -A | grep inotify
 # edit/add configuration system variables
 sudo vi /etc/sysctl.conf
 sudo sysctl -p --system  # apply changes and then restart your application(s) to get changed value(s).
+
+# determine linux version - variant
+cat /etc/os-release
+hostnamectl
+# find linux kernel version
+uname -r 
 ```  
 
 ## sudo vs su
