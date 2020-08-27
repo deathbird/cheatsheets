@@ -480,6 +480,16 @@ unit files:           https://www.digitalocean.com/community/tutorials/understan
 		# press k (kill) PID (enter twice)
 		# press h (help)
 
+# kill all processes of a program
+
+	# with on command!!!
+	killall slack
+	
+        # show pids of program's processes
+        pidof slack
+	sudo kill -SIGTERM `pidof slack` 
+	
+
 # kill process by pid:
 
 	ps aux | grep java	# find process by name. Alternatively use : pidof java
