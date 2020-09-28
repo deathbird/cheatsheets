@@ -119,12 +119,16 @@ sudo docker images
 
 # Network
 
-You can also use ping or telnet to troubleshoot network connectivity issues!!
+You can also use ping, curl or telnet to troubleshoot network connectivity issues!!
 ```
 docker network ls
+curl http://localhost:5000
 
 # Docker runs an internal DNS server configured automatically for containers that is available at 127.0.0.11 from within a container
 ping -c 2 127.0.0.1
+
+# By inspecting the network you can find which IP addresses docker-compose internally assigns to each service (container)
+docker inspect <network_name>
 
 # to configure the DNS upstream resolution for a container
 # —dns flag set the DNS upstream resolver for a container (if not configured uses Google’s public DNS servers)
