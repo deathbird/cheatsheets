@@ -4,6 +4,9 @@ Ctrl+p Ctrl+q
 ```
 >docker container run -it —name=bb busybody:1.26
 
+# run container and open bash session (overriding it's entrypoint/cmd)!!!
+>docker-compose -f docker-compose.test.yml run --entrypoint "/bin/sh" <compose_service_name/container name>
+
 # -d flag to run the container in the background
 >docker container run -it -d —name=bb busybody:1.26
 
