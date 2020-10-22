@@ -482,8 +482,10 @@ unit files:           https://www.digitalocean.com/community/tutorials/understan
 
 # kill all processes of a program
 
-	# with on command!!!
+	# with one command!!!
 	killall slack
+	# or
+	ps aux | grep firefox | awk '{ print $2 }' | xargs kill -9
 	
         # show pids of program's processes
         pidof slack
