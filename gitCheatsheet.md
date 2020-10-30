@@ -125,6 +125,7 @@ git push origin +master:hotfixes
 
 # Rebasing on another branch
 # Will rebase a feature on devel branch:
+# --preserve-merges preserves the merge commits!!!
 # A_B_C_D_E      <-(devel)
 #        \_F_G_H <-(feature)
 # After rebase:
@@ -132,7 +133,8 @@ git push origin +master:hotfixes
 git checkout devel
 git pull
 git checkout feature
-git rebase devel
+git rebase --preserve-merges devel
+
 # alternatively, if not in feature branch the following checks out
 # automatically feature branch to do a rebase on it.
 git rebase devel feature
@@ -381,6 +383,49 @@ git stash push -m stash_description path/to/file.json
 
 ## rebase
 ```bash
+# use --preserve-merges to preserve the merge commits
+# it’s best to use when having a base feature “temp” with multiple feature branches, 
+# as it preserves the merge commits
+# https://stackoverflow.com/questions/15915430/what-exactly-does-gits-rebase-preserve-merges-do-and-why#:~:text=As%20with%20a%20normal%20git,replaying%20works%20for%20merge%20commits.
+# For example, take commit graph where m is a merge commit with parents E and G.
+
+#   B---C <-- master
+#  /                     
+# A-------D------E----m----H <-- topic
+#          \         /
+#           F-------G
+
+# Suppose we rebased topic (H) on top of master (C) using a normal, non-merge-preserving rebase:
+# (For example, checkout topic; rebase master.) In that case, git would select the following commits for replay:
+
+# pick D
+# pick E
+# pick F
+# pick G
+# pick H
+# and then update the commit graph like so:
+# Note that merge commit m is not selected for replay.
+#   B---C <-- master
+#  /     \                
+# A       D'---E'---F'---G'---H' <-- topic
+
+# If we instead did a --preserve-merges rebase of H on top of C. (For example, checkout topic; rebase --preserve-merges master.) 
+# In this new case, git would select the following commits for replay:
+
+# pick D
+# pick E
+# pick F (onto D' in the 'subtopic' branch)
+# pick G (onto F' in the 'subtopic' branch)
+# pick Merge branch 'subtopic' into topic
+# pick H
+# Now m was chosen for replay. Also note that merge parents E and G were picked for inclusion before merge commit m.
+# Here is the resulting commit graph:
+#  B---C <-- master
+# /     \                
+# A      D'-----E'----m'----H' <-- topic
+#         \          / 
+#          F'-------G'
+
 # (squash number_of_commits into one)
 # https://stackoverflow.com/questions/5189560/squash-my-last-x-commits-together-using-git
 git rebase -i HEAD~[number_of_commits]
