@@ -328,8 +328,12 @@ git rm [file_name]
 # show all commited files differences  
 git show <hash>  
 
-## (View differences:)
+## (View differences in working area)
 git diff <file>
+
+## (View differences in staging area)
+git diff --cached
+git diff --staged
 
 ## (View differences of SPECIFIC COMMIT:)
 git diff COMMIT_HASH^ COMMIT_HASH
