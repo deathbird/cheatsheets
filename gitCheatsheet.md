@@ -34,7 +34,9 @@ show all files commited on a specific commit
 
 Search commit log across all branches for given text  
 `git log --all --grep='<given-text>'
-`  
+
+List only (N=)15 commits in log
+`git log -n 15`
 
 ```
 # find all commits for given author (name is case sensitive), match is with like operator
@@ -162,6 +164,9 @@ git merge [branch_name]
 # (picking a single commit from a different branch and merging it with your current one)
 git cherry-pick [commit_hash]
 
+# picking a range of commits from a different branch and merging it with your current one
+# Postfix with ^ the starting commit to include it
+git cherry-pick [start commit_hash]^..[end commit_hash]
 ```
 
 ## submodules
