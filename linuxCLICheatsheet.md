@@ -767,13 +767,61 @@ Show lines/columns indication in status-bar:
 :set ruler
 
 
+## Terminator key bindings
+
+Super+I: new terminator window
+
+F11: Toggle fullscreen
+
+Shift+Ctrl+O: Split horizontally
+
+Shift+Ctrl+E: Split vertically
+
+Shift+Ctrl+T: Create new tab
+
+Super+T: Group terminals in tab
+
+Super+G: Group all terminals
+
+Ctrl+Page Up: Switch to previous tab
+
+Ctrl+Page Down: Switch to next tab
+
+Shift+Ctrl+Up arrow: Resize up
+
+Shift+Ctrl+Down arrow: Resize down
+
+Shift+Ctrl+ -> arrow: Resize right
+
+Shift+Ctrl+ <- arrow: Resize left
 
 
+Alt+Up arrow: Move to terminal up
+
+Alt+Down arrow: Move to terminal down
+
+Alt+ -> arrow: Move to terminal right
+
+Alt+ <- arrow: Move to terminal left
 
 
+Shift+Ctrl+X: Toggle zoom terminal
+
+Shift+Ctrl+F: search terminal
+
+Shift+Ctrl+G: Reset and clear terminal
+
+Shift+Ctrl+R: Reset terminal
+
+Shift+Ctrl+W: Close terminal
+
+Ctrl+Alt+W: Edit window title
+
+Ctrl+Alt+A: Edit tab title
+
+Ctrl+Alt+X: Edit terminal title
 
 
+Ctrl++ : Increase font
 
-
-
-
+Ctrl+- : Decrease font
