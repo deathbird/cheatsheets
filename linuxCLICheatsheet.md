@@ -136,7 +136,7 @@ sudo !!
 
 https://ss64.com/bash/syntax-keyboard.html 
 https://clementc.github.io/blog/2018/01/25/moving_cli/
-In the following C - <keyboard key> means pressing Ctrl key And <keyboard key> together.
+In the following C/A - <keyboard key> means pressing Ctrl/Alt key And <keyboard key> together.
 	
 C - d : exit  
 C - l : clear screen above current line  
@@ -149,6 +149,8 @@ C - a : goto start of line
 C - e : goto end of line  
 C - f : Move forward one character  
 C - B : To move backward one character  
+A - f : Move forward one word  
+A - B : To move backward one word  
 C - XX : Move between start of command line and current cursor position (and back again).  
 
 Editing:  
