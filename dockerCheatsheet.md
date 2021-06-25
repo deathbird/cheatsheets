@@ -5,6 +5,9 @@ Ctrl+p Ctrl+q
 >docker container run -it —name=bb busybody:1.26
 
 # run container and open bash session (overriding it's entrypoint/cmd)!!!
+>sudo docker run -it --entrypoint /bin/bash [docker_image]
+>docker-compose run txdata-test bash
+>docker-compose [-f docker-compose.alternative.yml] run txdata-test python manage.py shell
 >docker-compose -f docker-compose.test.yml run --entrypoint "/bin/sh" <compose_service_name/container name>
 
 # -d flag to run the container in the background
@@ -117,6 +120,11 @@ sudo watch -n 1 -d docker ps -a
 
 # show installed docker images:
 sudo docker images
+
+# run container and open bash session (overriding it's entrypoint/cmd)!!!
+docker-compose run txdata-test bash
+docker-compose [-f docker-compose.alternative.yml] run txdata-test python manage.py shell
+docker-compose -f docker-compose.test.yml run --entrypoint "/bin/sh" <compose_service_name/container name>
 
 ```
 
