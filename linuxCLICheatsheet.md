@@ -769,6 +769,41 @@ Show lines/columns indication in status-bar:
 :set ruler
 
 
+## tmux key bindings / commands
+```bash
+## key bindings
+C + b, PageUp: Scroll mode (use arrows up/down, page up/down to scroll cli output)
+Esc: exit scroll mode
+
+C + b, ?: Help
+	
+# window - panes
+C + b, w:  Show windows list	
+C + b, ,:  Rename current window
+C + b, c:  Create new window
+C + b, 0-9: Switch between windows (You can see all created windows in the bottom list of Tmux window)
+C + b, arrow key: Switch between panes (ctrl + b + arrow keys)
+C + b, %: split pane horizontally
+C + b, ": split pane verticaly
+	
+## tmux commands
+# Start tmux
+tmux
+	
+# Start saved session
+tmux attach
+
+# Display sessions
+tmux ls
+
+# Start a new shared session
+# for more details -> https://www.howtoforge.com/sharing-terminal-sessions-with-tmux-and-screen
+tmux -S /tmp/shared_session
+chmod 777 /tmp/shared_session #Anyone can now join your session
+# Attach to a shared session
+tmux -S /tmp/shared_session attach
+```
+	
 ## Terminator key bindings
 
 Super+I: new terminator window
