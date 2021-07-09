@@ -4,8 +4,22 @@
 * [Pyenv, virtualenvwrapper, etc setup guide](https://gist.github.com/wronk/a902185f5f8ed018263d828e1027009b)
 * [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 * [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
-* [PyCharm guide](https://realpython.com/pycharm-guide/#searching-and-navigating-in-pycharm)
 * [Understanding slice notation](https://stackoverflow.com/questions/509211/understanding-slice-notation)
+
+## IPDB keyboard shortcuts
+```
+Ctrl-r 	Reverse-search through command history
+
+Ctrl-d 	Delete next character in line
+Ctrl-k 	Cut text from cursor to end of line
+Ctrl-u 	Cut text from beginning of line to cursor
+Ctrl-y 	Yank (i.e. paste) text that was previously cut
+Ctrl-t 	Transpose (i.e., switch) previous two characters
+
+Ctrl-l 	Clear terminal screen
+Ctrl-c 	Interrupt current Python command
+Ctrl-d 	Exit IPython session
+```
 
 ## virtualenvwrapper
 ```
