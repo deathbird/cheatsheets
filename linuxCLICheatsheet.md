@@ -786,6 +786,13 @@ C + b, arrow key: Switch between panes (ctrl + b + arrow keys)
 C + b, %: split pane horizontally
 C + b, ": split pane verticaly
 	
+# searh text on a pane:
+# https://superuser.com/questions/231002/how-can-i-search-within-the-output-buffer-of-a-tmux-shell
+C + b [, C + s, type string to find, Enter, n (find next occcurence)
+	
+# find window (based on text displayed on it):
+C + b f, type text to find, Enter (might display list of results)
+	
 ## tmux commands
 # Start tmux
 tmux
