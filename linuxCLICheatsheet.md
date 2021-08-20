@@ -203,13 +203,15 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH:/opt/PhpStorm-183.4886.46/bin"
 # show environment variable
 echo "$PATH"
 
-#You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
+# You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
 # and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal.
+# Escape using backslash \ inside double quotes.
 
 # Follow log:
 tail -100f /path/to/file | grep the_string_to_search_for
 
 # show users
+# last field for every user is the shell used, ie /bin/bash
 cat /etc/passwd
 
 # show groups
@@ -232,7 +234,11 @@ sudo sysctl -p --system  # apply changes and then restart your application(s) to
 cat /etc/os-release
 hostnamectl
 # find linux kernel version
-uname -r 
+uname -r
+	
+# $- is a string listing of all the current shell option flags. It will contain i if the shell is interactive.
+echo $i
+himBHs
 ```  
 
 ## sudo vs su
@@ -343,8 +349,14 @@ $ gunzip file1.gz
 # https://unix.stackexchange.com/questions/2464/timestamp-modification-time-and-created-time-of-a-file  
 $ stat <filename>  
 
-# Locate the binary file  
-$ which apache2  
+# Locate the binary file/cmd 
+$ which apache2
+	
+# Find if cmd is builtin or external
+type -a cd
+cd is a shell builtin
+type -a awk
+awk is /usr/bin/awk
 
 # Locate the binary, source, and manual-page files for a command  
 $ whereis apache2  
@@ -366,6 +378,10 @@ Binary files 1.bin and 2.bin differ
 
 ## Get Help
 ```bash
+# for shell built-in commands use help:
+help cd
+
+# for external commands:
 man <term> # term can be a bash command, a config file ( or daemon (ex. apache2)
 
 # search for command in manual pages
