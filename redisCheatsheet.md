@@ -19,3 +19,28 @@ key names:
 - use colons to separate parts of key names
 - Your schema is your key's name so keep them in order
 
+## redis-cli
+```
+# flush from container
+$ docker exec -it <container_name> bash
+$ redis-cli -h redis -p 6379
+> flushall
+
+# display all matching keys with a pattern like: 'some-word'*
+KEYS <pattern with wildcards>
+
+# learn the type of value of <key>
+TYPE some_key
+>set
+
+# Redis supports 5 data types. You need to know what type of value that a key maps to, 
+# as for each data type, the command to retrieve it is different.
+# Here are the commands to retrieve key value:
+
+# if value is of type string -> GET <key>
+# if value is of type hash -> HGETALL <key>
+# if value is of type lists -> lrange <key> <start> <end>
+# if value is of type sets -> smembers <key>
+# if value is of type sorted sets -> ZRANGEBYSCORE <key> <min> <max>
+
+```
