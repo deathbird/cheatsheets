@@ -801,6 +801,7 @@ C + b, 0-9: Switch between windows (You can see all created windows in the botto
 C + b, arrow key: Switch between panes (ctrl + b + arrow keys)
 C + b, %: split pane horizontally
 C + b, ": split pane verticaly
+C + b, z: toggle on/off maximize pane !!
 
 # keyboard Copy + Paste (https://www.rockyourcode.com/copy-and-paste-in-tmux/):
 1. Enter copy mode: C + b [
