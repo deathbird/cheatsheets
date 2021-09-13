@@ -1,9 +1,12 @@
-Error: "ImportError: libffi.so.6: cannot open shared object file: No such file or directory"
+# Various Issues
 
+## Error: "ImportError: libffi.so.6: cannot open shared object file: No such file or directory"
+
+### Description
 When trying to manually/auto pip install a python dependency. In my case error was triggered when executing inside a pyenv virtual environment
 the `git commit` command which subsequently triggers pre-commit checks which tried to be installed (pip) in the virtual env.
 
-Solution:
+### Solution
 This happens because my Ubuntu 20.04.LTSv3 has installed libffi.so.7 while the extension expects libffi.so.6. Following
 [this guide](https://github.com/microsoft/vscode-postgresql/issues/77), from [this answer](https://github.com/microsoft/vscode-postgresql/issues/77#issuecomment-818506089)
 I understood libffi6 is a PPA package. So I also followed [this article](https://askubuntu.com/questions/639493/how-to-find-which-ppa-contains-a-specific-package)
