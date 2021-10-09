@@ -21,10 +21,28 @@ key names:
 
 ## redis-cli
 ```
-# flush from container
 $ docker exec -it <container_name> bash
 $ redis-cli -h redis -p 6379
+
+# connect to database no 0
+redis-cli
+127.0.0.1:6379>
+
+# connect to database no 2
+redis-cli -n 2
+127.0.0.1:6379[1]>
+
+# connect to database no 2 from redis-cli
+127.0.0.1:6379>select 2
+127.0.0.1:6379[2]>
+
+# flush from container
 > flushall
+
+# show info about databases
+127.0.0.1:6379> INFO keyspace
+# Keyspace
+db13:keys=1,expires=0,avg_ttl=0
 
 # display all matching keys with a pattern like: 'some-word'*
 KEYS <pattern with wildcards>
