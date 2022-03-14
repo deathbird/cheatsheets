@@ -32,8 +32,11 @@ shows the changes of a file, work even if the file was deleted !!!!
 show all files commited on a specific commit  
 `git diff-tree --no-commit-id --name-only -r bd61ad98`
 
-Search commit log across all branches for given text  
+Search commit log across all branches for given text (in commit messages).
 `git log --all --grep='<given-text>'
+
+Search commit log diffs after given date, for given text in diffs.
+`git log -p -S 'migrations.Migration' --since='Nov 24 2021' `
 
 List only (N=)15 commits in log
 `git log -n 15`
