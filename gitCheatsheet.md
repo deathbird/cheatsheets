@@ -35,8 +35,11 @@ show all files commited on a specific commit
 Search commit log across all branches for given text (in commit messages).
 `git log --all --grep='<given-text>'
 
-Search commit log diffs after given date, for given text in diffs.
-`git log -p -S 'migrations.Migration' --since='Nov 24 2021' `
+Search commit log diffs between given dates, for given text in diffs.
+`git log -p -S 'migrations.Migration' --since='Nov 24 2021' --until='Dec 31 2021'`
+
+Search commit log diffs between given dates, for given regexp in diffs.
+`git log -p -G 'some regexp' --since='Nov 24 2021' --until='Dec 31 2021'`
 
 List only (N=)15 commits in log
 `git log -n 15`
