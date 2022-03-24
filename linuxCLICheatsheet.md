@@ -611,6 +611,13 @@ firefox (1)          - a free and open source web browser from Mozilla
 
 # report working directory of a process PID
 $pwdx 22745
+	
+# connect to host + port via telnet
+$telnet localhost 6899
+	
+# connect to host + port via Netcat
+sudo apt-get install Netcat
+nc -vz localhost 6899
 ```
 
 
