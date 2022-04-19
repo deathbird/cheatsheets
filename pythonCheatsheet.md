@@ -356,3 +356,62 @@ find . -name "*.pyc" -exec rm -f {} \;
 
 ```
 
+## Recipes
+
+### Date - Time - Timezones
+```python
+# current datetime
+import datetime
+print('Current date/time: {}'.format(datetime.datetime.now()))
+>>> Current date/time: 2018-06-29 08:15:27.243860
+
+date_time_str = '2018-06-29 08:15:27.243860'
+date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S.%f')
+print('Date:', date_time_obj.date())
+print('Time:', date_time_obj.time())
+print('Date-time:', date_time_obj)
+>>> Date: 2018-06-29
+>>> Time: 08:15:27.243860
+>>> Date-time: 2018-06-29 08:15:27.243860
+
+# Transform a UTC datetime string to timestamp
+sdatetime = "2012-07-23T12:34:12Z"
+time.mktime(datetime.datetime.strptime("2012-07-23T12:34:12Z", "%Y-%m-%dT%H:%M:%SZ").timetuple())
+>>> 1343046852.0
+
+# Timezones
+# install pytz library
+import pytz
+dtime = dt.datetime.now()
+print(dtime)
+print(dtime.tzinfo)
+>>> 2018-06-29 22:16:36.132767
+>>> None
+
+dtime = dt.datetime.now(pytz.utc)
+print(dtime)
+print(dtime.tzinfo)
+>>> 2018-06-29 17:08:00.586525+00:00
+>>> UTC
+
+# Converting to timezone aware datetime object
+date_time_str = '2018-06-29 17:08:00'
+date_time_obj = dt.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S')
+timezone = pytz.timezone('America/New_York')
+timezone_date_time_obj = timezone.localize(date_time_obj)
+print(timezone_date_time_obj)
+print(timezone_date_time_obj.tzinfo)
+>>> 2018-06-29 17:08:00-04:00
+>>> America/New_York
+
+# Converting Timezones
+timezone_nw = pytz.timezone('America/New_York')
+nw_datetime_obj = dt.datetime.now(timezone_nw)
+timezone_london = pytz.timezone('Europe/London')
+london_datetime_obj = nw_datetime_obj.astimezone(timezone_london)
+print('America/New_York:', nw_datetime_obj)
+print('Europe/London:', london_datetime_obj)
+>>> America/New_York: 2018-06-29 22:21:41.349491-04:00
+>>> Europe/London: 2018-06-30 03:21:41.349491+01:00
+
+```
