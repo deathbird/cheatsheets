@@ -333,6 +333,9 @@ sudo yum install php55w php55w-opcache php55w-cli php55w-common php55w-gd php55w
 ```bash
 # list only hidden files  
 $ ls -ld .?*  
+	
+# count how many files of certain pattern exist in a folder
+find . -name '*.json' -maxdepth 1 -printf '.' | wc -m
 
 # Create and extract a .tar.gz archive using command line
 # create a tar.gz archive from a given folder you can use the following command
@@ -344,6 +347,9 @@ tar -tvf tar-archive-name.tar.gz.
 
 # unzip *.gz  
 $ gunzip file1.gz  
+	
+# create a file.zip file from the contents of a directory (recursively)
+zip -r file.zip folder_to_zip/
 
 # Display file or file system status, timestamps (Access, Modify, Change)  
 # https://unix.stackexchange.com/questions/2464/timestamp-modification-time-and-created-time-of-a-file  
