@@ -11,6 +11,8 @@ Useful cheatsheets for devs.
 * [Symfony 4](https://github.com/deathbird/cheatsheets/blob/master/symfony4Cheatsheet.md)
 * [node - npm](https://github.com/deathbird/cheatsheets/blob/master/node_npmCheatsheed.md)
 * [MySQL](https://github.com/deathbird/cheatsheets/blob/master/mysqlCheatsheet.md)
-* [redis](https://github.com/deathbird/cheatsheets/blob/master/redisCheatsheet.md)
 * [PhpStorm](https://github.com/deathbird/cheatsheets/blob/master/PhpStormCheatsheet.md)
+* [Postgres](https://github.com/deathbird/cheatsheets/blob/master/PostgresCheatsheet.md)
+* [redis](https://github.com/deathbird/cheatsheets/blob/master/redisCheatsheet.md)
+
 
