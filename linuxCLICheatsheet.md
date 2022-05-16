@@ -837,7 +837,9 @@ tmux attach
 
 # Display sessions
 tmux ls
-
+# Pick whatever session you want to re-attach. Then do ... to re-attach it to a new tmux instance and release it from the old one.
+tmux attach -d -t <session id>
+	
 # Start a new shared session
 # for more details -> https://www.howtoforge.com/sharing-terminal-sessions-with-tmux-and-screen
 tmux -S /tmp/shared_session
