@@ -230,6 +230,9 @@ git config --global core.autocrlf true
 
 # what file global config is saved in  
 git config --global --edit
+
+# show aliases of git commands
+git config --list | grep alias
 ```  
 
 ## UNDO!!!!
