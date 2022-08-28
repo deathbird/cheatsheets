@@ -20,5 +20,7 @@ date_trunc('month', current_date)
 -- (some_query_alias.array_of_ids is produced by select array_agg(some_id) as array_of_ids)
 ... where ... and id_field in (select unnest(some_query_alias.array_of_ids))
 
+-- generate a 32 length UUID
+select uuid_generate_v4()
 
 ```
