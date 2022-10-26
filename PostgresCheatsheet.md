@@ -2,6 +2,12 @@
 
 ## Functions
 ```SQL
+-- set statement timeout
+SET statement_timeout = '15min';
+SHOW statement_timeout;
+-- no timeout!
+SET statement_timeout = 0;
+
 -- Get 1st day current of month
 date_trunc('month', current_date)
 
@@ -68,6 +74,17 @@ where t.source_entity_id in (select id from resources_sourceentity
 
 ## Other
 ```SQL
+-- Identify long running queries
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '10 minute';
+
+-- Kill query
+SELECT pg_terminate_backend(<pid>);
 
 -- kill all other sessions in a database (You have to be superuser to use pg_terminate_backend)
 SELECT pg_terminate_backend(pid)
@@ -134,7 +151,8 @@ CREATE DATABASE xxx OWNER = user_name;
 # drop all objects owned by user/role - didn’t work
 drop owned by user_name;
 
-
+# measure time of every statement
+\timing;
 
 
 
