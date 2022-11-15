@@ -1,32 +1,32 @@
-# Linux / Bash CLI Cheatsheet 
+# Linux / Bash CLI Cheatsheet
 
-**You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
+**You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions)
 and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal.**
 
 
 ## Links
 
-https://superuser.com/questions/176783/what-is-the-difference-between-executing-a-bash-script-vs-sourcing-it/176788#176788  
+https://superuser.com/questions/176783/what-is-the-difference-between-executing-a-bash-script-vs-sourcing-it/176788#176788
 https://serverfault.com/questions/261802/what-are-the-functional-differences-between-profile-bash-profile-and-bashrc
 
-http://johnstowers.co.nz/pages/bash-cheat-sheet.html  
-https://github.com/LeCoupa/awesome-cheatsheets/blob/master/languages/bash.sh  
-https://www.panix.com/~elflord/unix/bash-tute.html  
-https://learnpythonthehardway.org/book/appendixa.html  
-https://guide.bash.academy/  
-https://tiswww.case.edu/php/chet/bash/bashref.html  
-http://mywiki.wooledge.org/BashGuide  
+http://johnstowers.co.nz/pages/bash-cheat-sheet.html
+https://github.com/LeCoupa/awesome-cheatsheets/blob/master/languages/bash.sh
+https://www.panix.com/~elflord/unix/bash-tute.html
+https://learnpythonthehardway.org/book/appendixa.html
+https://guide.bash.academy/
+https://tiswww.case.edu/php/chet/bash/bashref.html
+http://mywiki.wooledge.org/BashGuide
 http://mywiki.wooledge.org/BashFAQ
 http://wiki.bash-hackers.org/
-https://terminalsare.sexy/  
+https://terminalsare.sexy/
 
-http://www.gnu.org/software/bash/manual/bash.html 
+http://www.gnu.org/software/bash/manual/bash.html
 
-DDOS attack investigation:  
+DDOS attack investigation:
 https://www.2daygeek.com/count-check-apache-concurrent-connections-using-netstat-command/#
 
 ## Tools
-* [ShellCheck - finds bugs in your shell scripts](https://www.shellcheck.net/)  
+* [ShellCheck - finds bugs in your shell scripts](https://www.shellcheck.net/)
 
 ## Variables
 * Environment vars: Defined for the current shell and inherited by child shells and processes.
@@ -133,55 +133,8 @@ sudo !!
 
 
 ## BASH keyboard shortcuts
+[bash shortcuts](keybindingsCheatsheet.md#bash-shortcuts)
 
-https://ss64.com/bash/syntax-keyboard.html 
-https://clementc.github.io/blog/2018/01/25/moving_cli/
-In the following C/A - <keyboard key> means pressing Ctrl/Alt key And <keyboard key> together.
-	
-C - d : exit  
-C - l : clear screen above current line  
-C - [ : Equivalent to ESC key.  
-C - V : Makes the next character typed verbatim  
-C - X : Lists the possible filename completions of the current word.  
-
-Movement:  
-C - a : goto start of line  
-C - e : goto end of line  
-C - f : Move forward one character  
-C - B : To move backward one character  
-A - f : Move forward one word  
-A - B : To move backward one word  
-C - XX : Move between start of command line and current cursor position (and back again).  
-
-Editing:  
-C - D : Delete one character backward  
-C - H : Delete the characters before the cursor, same as BASKSPACE.  
-C - K : Delete all characters after the cursor  
-C - u : cut from cursor to START of line also clearing all the line if you are at line end  
-C - w : cut from cursor to START of word also clearing all the line if you are at line end  
-C - k : cut from cursor to END of line also clearing all the line if you are at line start  
-C - y : paste  
-C - T : Swaps the last two characters.  
-
-
-History:  
-C - r : search command history recursively  
-C - o   Execute the command found via C - r or C - s  
-C - g   Escape from history searching mode  
-C - N : Display next line in command history.  
-C - P : Displays the previous line in command history.  
-C - S : Searches the history forward.  
-
-Commands:  
-C - C : Stop the currently running command  
-C - J / C - M : Same as ENTER/RETURN key.  
-C - Z : Stops the current command.  
-
-Use !! to prefix to the last command:  
-sudo !!  
-
-!:n selects ONLY the nth argument of the last command  
-!$ selects the last argument of the last command. 
 
 ## Various BASH useful
 ```bash
@@ -203,7 +156,7 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH:/opt/PhpStorm-183.4886.46/bin"
 # show environment variable
 echo "$PATH"
 
-# You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions) 
+# You should use "double quotes" for any argument that contains expansions (such as $variable or $(command) expansions)
 # and 'single quotes' for any other arguments. Single quotes make sure that everything in the quotes remains literal.
 # Escape using backslash \ inside double quotes.
 
@@ -235,24 +188,24 @@ cat /etc/os-release
 hostnamectl
 # find linux kernel version
 uname -r
-	
+
 # $- is a string listing of all the current shell option flags. It will contain i if the shell is interactive.
 echo $i
 himBHs
-```  
+```
 
 ## sudo vs su
 
 1. sudo runs a command as the root user
-2. su <username> opens a shell impersonating <username>.  
-`su <username> -c "command to execute"  # to execute a command`  
+2. su <username> opens a shell impersonating <username>.
+`su <username> -c "command to execute"  # to execute a command`
 In Ubuntu root user has no password so there is a difficulty to run su as root user ...
 
 
-gksu / gksudo : Run a graphical command as root / another user  
+gksu / gksudo : Run a graphical command as root / another user
 `$ gksu nautilus`
 
-## dpkg  
+## dpkg
 
 Packages are manually installed via the dpkg command (Debian Package Management System). dpkg is the backend to commands like apt-get and aptitude, which in turn are the backend for GUI install apps like the Software Center and Synaptic.
 
@@ -260,7 +213,7 @@ https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-comman
 
 ```bash
 # Install a package
-sudo dpkg -i {package_name}    
+sudo dpkg -i {package_name}
 sudo dpkg -i skype-ubuntu-precise_4.2.0.11-1_i386.deb
 # Remove a package
 sudo dpkg -r {package_name}
@@ -278,25 +231,25 @@ dpkg -l vlc
 # And this will show the location where the package will be installed. Here -S (capital S) to search whether the package was installed or not.
 sudo dpkg -S {package_name}
 sudo dpkg -S skype
-``` 
+```
 
-## apt-get  
+## apt-get
 ```bash
-sudo apt list --installed | grep php   # list installed php packages 
+sudo apt list --installed | grep php   # list installed php packages
 
-sudo apt-cache search php7-*    # find the name of a package from repos  
+sudo apt-cache search php7-*    # find the name of a package from repos
 
-sudo apt-get install php7.1-mbstring 
+sudo apt-get install php7.1-mbstring
 
 # SSH install in Ubuntu:
-sudo apt-get install openssh-server 
+sudo apt-get install openssh-server
 sudo service ssh status
 
 # completely uninstall (application + system configuration files) an application
-$ sudo apt purge gitkraken 
+$ sudo apt purge gitkraken
 ```
 
-## yum (CentOS package manager) 
+## yum (CentOS package manager)
 ```bash
 # check if app is installed (centos)
 yum list installed httpd
@@ -305,7 +258,7 @@ yum list installed mysql-server
 # check if apache is installed alternative (centos)
 rpm -qa | grep httpd
 
-# CentOS 6.5 setup apache, mysql, php 
+# CentOS 6.5 setup apache, mysql, php
 ------------------------------------
 sudo yum install httpd
 
@@ -329,58 +282,58 @@ sudo yum install php55w php55w-opcache php55w-cli php55w-common php55w-gd php55w
 ```
 
 ## files (find, compare, zip...)
-**Everything is a file: even a device (monitor, printer), a directory etc.**  
+**Everything is a file: even a device (monitor, printer), a directory etc.**
 ```bash
-# list only hidden files  
-$ ls -ld .?*  
-	
+# list only hidden files
+$ ls -ld .?*
+
 # count how many files of certain pattern exist in a folder
 find . -name '*.json' -maxdepth 1 -printf '.' | wc -m
 
 # Create and extract a .tar.gz archive using command line
 # create a tar.gz archive from a given folder you can use the following command
 tar -zcvf tar-archive-name.tar.gz source-folder-name.
-# extract - unzip a tar.gz compressed archive you can use the following command. 
+# extract - unzip a tar.gz compressed archive you can use the following command.
 tar -zxvf tar-archive-name.tar.gz.
 # list files in tar.gz file
 tar -tvf tar-archive-name.tar.gz.
 
-# unzip *.gz  
-$ gunzip file1.gz  
-	
+# unzip *.gz
+$ gunzip file1.gz
+
 # create a file.zip file from the contents of a directory (recursively)
 zip -r file.zip folder_to_zip/
 
-# Display file or file system status, timestamps (Access, Modify, Change)  
-# https://unix.stackexchange.com/questions/2464/timestamp-modification-time-and-created-time-of-a-file  
-$ stat <filename>  
+# Display file or file system status, timestamps (Access, Modify, Change)
+# https://unix.stackexchange.com/questions/2464/timestamp-modification-time-and-created-time-of-a-file
+$ stat <filename>
 
-# Locate the binary file/cmd 
+# Locate the binary file/cmd
 $ which apache2
-	
+
 # Find if cmd is builtin or external
 type -a cd
 cd is a shell builtin
 type -a awk
 awk is /usr/bin/awk
 
-# Locate the binary, source, and manual-page files for a command  
-$ whereis apache2  
+# Locate the binary, source, and manual-page files for a command
+$ whereis apache2
 
-# Show all possibilities of a command  
-$type -a echo  
-echo is a shell builtin  
-echo is /bin/echo  
+# Show all possibilities of a command
+$type -a echo
+echo is a shell builtin
+echo is /bin/echo
 
-# compare files / folders:  
-# -r : recursive, -q : short syntax, -l : paginate  
-diff -rql  nlo-toto/Public/static/cms/ CanvasDocker/Public/static/cms/  
+# compare files / folders:
+# -r : recursive, -q : short syntax, -l : paginate
+diff -rql  nlo-toto/Public/static/cms/ CanvasDocker/Public/static/cms/
 
-# will show if two binary files are the same or not:  
+# will show if two binary files are the same or not:
 [me@host ~]$ diff 1.bin 2.bin
 Binary files 1.bin and 2.bin differ
-# If there is no output from the command, it means that the files have no differences.  
-```  
+# If there is no output from the command, it means that the files have no differences.
+```
 
 ## Get Help
 ```bash
@@ -418,7 +371,7 @@ $ whereis apache2
        9   Kernel routines [Non standard]
 
 # for example passwd is a command and a file (*.gz are man pages)
-$ whereis passwd  
+$ whereis passwd
 passwd: /usr/bin/passwd /etc/passwd /usr/share/man/man5/passwd.5.gz /usr/share/man/man1/passwd.1ssl.gz /usr/share/man/man1/passwd.1.gz
 $ man passwd     # opens the first manual found
 $ man 5 passwd   # opens a page from section 5 -> man <section> <file>
@@ -426,12 +379,12 @@ $ man 5 passwd   # opens a page from section 5 -> man <section> <file>
 
 # Explanation of linux folder hierarchy
 $ man hier
-```  
+```
 ## Process manage / info
 
-system services mgmt: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units  
-logging :             https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs  
-unit files:           https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files  
+system services mgmt: https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
+logging :             https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs
+unit files:           https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files
 
 ```bash
 # linux version:
@@ -444,7 +397,7 @@ unit files:           https://www.digitalocean.com/community/tutorials/understan
 > systemctl list-units --all | grep apache
   apache2.service                           loaded    inactive dead      LSB: Apache2 web server
 
-> systemctl                                        # see a list of all the active (ONLY) units 
+> systemctl                                        # see a list of all the active (ONLY) units
 > systemctl list-units --all --state=inactive      # filter inactive services
 > systemctl list-units --type=service              # filter units of type service
 
@@ -463,7 +416,7 @@ unit files:           https://www.digitalocean.com/community/tutorials/understan
 > systemctl list-dependencies sshd.service          # see a unit's dependency tree
 > systemctl show sshd.service                       # To see the low-level properties of a unit
 # 'mask' a unit to prevent the X service from being started, automatically or manually, for as long as it is masked.
-> sudo systemctl mask nginx.service                 
+> sudo systemctl mask nginx.service
 > sudo systemctl unmask nginx.service               # Undo 'mask'ing a unit
 > systemctl list-unit-files                         # to show also masked services!!!
 > timedatectl                                       # !!! timezone info
@@ -477,26 +430,26 @@ unit files:           https://www.digitalocean.com/community/tutorials/understan
 	sudo service mysqld start
 	sudo service mysqld restart
 	sudo service memcached restart && service session_cache restart
-	
+
 	sudo service mysql status
 	sudo service mysql start
 
        # set service to autostart
-	sudo chkconfig httpd on	     
-	sudo chkconfig mysqld on 
+	sudo chkconfig httpd on
+	sudo chkconfig mysqld on
 
        # list autostart services
-	sudo chkconfig --list | grep mysqld  
+	sudo chkconfig --list | grep mysqld
 
 # services running check:
-	
+
 	service httpd status
 	service apache2 status
 	service mysql status
 	ps aux | grep apache
         # check all running servers on machine!!!
-	sudo netstat -tulpen 
-       
+	sudo netstat -tulpen
+
 # task management:
 
 	top
@@ -510,18 +463,18 @@ unit files:           https://www.digitalocean.com/community/tutorials/understan
 	killall slack
 	# or
 	ps aux | grep firefox | awk '{ print $2 }' | xargs kill -9
-	
+
         # show pids of program's processes
         pidof slack
-	sudo kill -SIGTERM `pidof slack` 
-	
+	sudo kill -SIGTERM `pidof slack`
+
 
 # kill process by pid:
 
 	ps aux | grep java	# find process by name. Alternatively use : pidof java
 	kill -SIGTERM <pid>	# kill sending termination signal to the process (the safest way).
         kill -9 <pid>           # if above kill and anything else fails!!!
-       
+
 # EXAMPLE: stopping a misbehaving memchache to restart memcache. Session_cache below also runs in Memcache.
 [root@igcdemo current]> service --status-all | grep memcach
 memcached (pid  3237) is running...
@@ -533,7 +486,7 @@ drwxr-xr-x   2 memcached memcached 4096 2018-05-30 14:16 .
 drwxr-xr-x. 22 root      root      4096 2018-03-28 14:47 ..
 -rw-r--r--   1 memcached memcached    5 2017-12-05 22:02 session_cache.pid
 
-[root@igcdemo ~]> rm /var/run/memcached/session_cache.pid 
+[root@igcdemo ~]> rm /var/run/memcached/session_cache.pid
 rm: remove regular file `/var/run/memcached/session_cache.pid'? y
 
 [root@igcdemo ~]> service --status-all | grep memcach
@@ -547,8 +500,8 @@ memcache: unrecognized service
 Starting memcached:                                        [  OK  ]
 [root@igcdemo ~]> service --status-all | grep memcach
 memcached (pid  5217) is running...
-memcached (pid  5192) is running...	
-```  
+memcached (pid  5192) is running...
+```
 ## Directories
 ```bash
 # delete non empty directory:
@@ -566,7 +519,7 @@ tree -d .
 
 # Back to home dir:
 cd
-```  
+```
 
 ## Free disk space
 ```bash
@@ -579,7 +532,7 @@ du -hs /path/to/directory
 
 
 ## Disks - partitions
-```bash  
+```bash
 # friendly listing
 $ sudo lsblk -f
 
@@ -595,7 +548,7 @@ $ findmnt
 # list all mounts
 $ cat /proc/mounts
 $ cat /proc/mounts | grep ext4  # or grep vfat (to display usb drives)
-```  
+```
 
 ## Network
 ```bash
@@ -617,10 +570,10 @@ firefox (1)          - a free and open source web browser from Mozilla
 
 # report working directory of a process PID
 $pwdx 22745
-	
+
 # connect to host + port via telnet
 $telnet localhost 6899
-	
+
 # connect to host + port via Netcat
 sudo apt-get install Netcat
 nc -vz localhost 6899
@@ -633,7 +586,7 @@ $ ls -l a b >myfiles.ls 2>/dev/null
 
 # Redirections: Make FD2 write to where FD1 is writing (FD copying: The connection to the stream used by FD y is copied to FD x.)
 $ ls -l a b >myfiles.ls 2>&1            # CORRECT! Redirecting standard output and standard error.
-$ ls -l a b &>myfiles.ls		# CORRECT! Shortcut of the above. 
+$ ls -l a b &>myfiles.ls		# CORRECT! Shortcut of the above.
 $ ls -l a b >myfiles.ls 2>myfiles.ls    # WRONG! WRONG! The streams end up mixed in the output file!!!! Use the above way.
 $ ls -l a b 2>&1 >myfiles.ls		# ALSO WRONG! Copy FD2 to FD1 but FD1 hasn't been redirected (to file) yet so it is still the terminal output.
 
@@ -650,9 +603,9 @@ $ echo World &>>~/world	# Append also FD2 (error) to file.
 $ xclip -selection clipboard < ~/.ssh/id_rsa.pub   # copy contents of private key file to clipboard
 $ php -i | xclip -selection clipboard              # send/pipe command output to clipboard!!
 $ xclip -selection clipboard - o                   # paste to std output clipboard contents!!
-```  
+```
 
-## grep  
+## grep
 ```bash
 
 # -r: recursive, --color=... use color highlight , use more for paging
@@ -666,7 +619,7 @@ grep -v -r "Edge::app()->i18n" * | grep -v "Edge::app()->getConfig" | grep -v "E
 
 # print only filenames for --include pattern files, excluding exclude-dir folder
 grep -lr --include=*.js --exclude-dir=*node_modules* 'setTimeout('
-```  
+```
 
 ## Find the location of an icon of a launcher in use
 ```bash
@@ -681,17 +634,17 @@ Icon=gnome-panel-launcher
 You can then find the icon somewhere in /usr/share/icons, depending on your theme.
 
 Other possible folders containing icons:
-/usr/share/icons/     (typically contains pre-installed themes shared by all users) 
+/usr/share/icons/     (typically contains pre-installed themes shared by all users)
 /usr/share/pixmaps/
 /usr/share/app-install/icons/
 ~/.local/share/icons
 ~/.local/icons
 ~/.icons/
-./home/jdi/.local/share/applications/jetbrains-phpstorm.desktop 
-```  
+./home/jdi/.local/share/applications/jetbrains-phpstorm.desktop
+```
 
 ## apachectl commands - apache
-```bash  
+```bash
 # Show apache vhosts and runtime config !!!
 apachectl -S
 
@@ -712,7 +665,7 @@ lrwxrwxrwx    1 root root    19 2015-10-19 12:02 run -> ../../var/run/httpd
 # /etc/httpd/conf folder contains httpd.conf file that states which other conf (vhost) files  the server imports. Generally they are under conf.d dir.
 $ ls conf.d/
 oddset.conf  php.conf  README  welcome.conf  # here we are interested for oddset.conf to see DocumentRoot, ServerName directives.
-```  
+```
 
 ## redis useful
 ```bash
@@ -720,41 +673,41 @@ oddset.conf  php.conf  README  welcome.conf  # here we are interested for oddset
 $ docker exec -it igc-redis bash
 $ redis-cli -h redis -p 6379
 > flushall
-```  
+```
 
 ## Secure copy SCP (http://www.hypexr.org/linux_scp_help.php)
 ```bash
 
 Copy the file "foobar.txt" from a remote host to the local host
 
-    $ scp your_username@remotehost.edu:foobar.txt /some/local/directory 
+    $ scp your_username@remotehost.edu:foobar.txt /some/local/directory
 
 Copy the file "foobar.txt" from the local host to a remote host
 
-    $ scp foobar.txt your_username@remotehost.edu:/some/remote/directory 
+    $ scp foobar.txt your_username@remotehost.edu:/some/remote/directory
 
 Copy the directory "foo" from the local host to a remote host's directory "bar"
 
-    $ scp -r foo your_username@remotehost.edu:/some/remote/directory/bar 
+    $ scp -r foo your_username@remotehost.edu:/some/remote/directory/bar
 
 Copy the file "foobar.txt" from remote host "rh1.edu" to remote host "rh2.edu"
 
     $ scp your_username@rh1.edu:/some/remote/directory/foobar.txt \
-    your_username@rh2.edu:/some/remote/directory/ 
-```  
+    your_username@rh2.edu:/some/remote/directory/
+```
 
 ## Usefull Linux services
-xinetd: https://www.cyberciti.biz/faq/linux-how-do-i-configure-xinetd-service/  
-xinetd example: http://sysbible.org/2008/12/04/having-haproxy-check-mysql-status-through-a-xinetd-script/  
+xinetd: https://www.cyberciti.biz/faq/linux-how-do-i-configure-xinetd-service/
+xinetd example: http://sysbible.org/2008/12/04/having-haproxy-check-mysql-status-through-a-xinetd-script/
 
-## nslookup  
+## nslookup
 
-https://medium.com/@jgefroh/demystifying-dns-for-web-developers-ace5a3ae559f  
-https://dougrathbone.com/blog/2012/03/03/devops-dns-for-developers-ndash-now-therersquos-no-excuse-not-to-know  
+https://medium.com/@jgefroh/demystifying-dns-for-web-developers-ace5a3ae559f
+https://dougrathbone.com/blog/2012/03/03/devops-dns-for-developers-ndash-now-therersquos-no-excuse-not-to-know
 
-```bash  
-# <subdomain of subdomain>.<subdomain>.<domain>.<TLD>  
-# TLD: top level domain  
+```bash
+# <subdomain of subdomain>.<subdomain>.<domain>.<TLD>
+# TLD: top level domain
 
 $ nslookup
 > atcom.gr
@@ -776,27 +729,7 @@ $ nslookup
 
 # change to Google DNS server to get an external view
 > server 8.8.8.8
-```  
-
-
-
-## vim
-
-Move around:  
-H: Left  
-J: Down  
-K: Up  
-L: Right  
-w: start of next word  
-e: end-of current word  
-): end of current sentence  
-(: start of current sententce  
-}: end of current paragraph  
-{: start of current paragraph  
-
-Show lines/columns indication in status-bar:
-:set ruler
-
+```
 
 ## tmux key bindings / commands
 ```bash
@@ -805,9 +738,9 @@ C + b, PageUp: Scroll mode (use arrows up/down, page up/down to scroll cli outpu
 Esc: exit scroll mode
 
 C + b, ?: Help
-	
+
 # window - panes
-C + b, w:  Show windows list	
+C + b, w:  Show windows list
 C + b, ,:  Rename current window
 C + b, c:  Create new window
 C + b, 0-9: Switch between windows (You can see all created windows in the bottom list of Tmux window)
@@ -821,17 +754,17 @@ C + b, z: toggle on/off maximize pane !!
 2. Use the arrow keys to go to the position from where you want to start copying. Press C + SPACE to start copying.
 3. Use arrow keys to go to the end of text you want to copy. Press ALT + w or C + w to copy into Tmux buffer.
 4. Press C + b, ] to paste in a possibly different Tmux pane/window.
-	
+
 # searh text on a pane (https://superuser.com/questions/231002/how-can-i-search-within-the-output-buffer-of-a-tmux-shell):
 C + b [, C + s, type string to find, Enter, n (find next occcurence)
-	
+
 # find window (based on text displayed on it):
 C + b f, type text to find, Enter (might display list of results)
-	
+
 ## tmux commands
 # Start tmux
 tmux
-	
+
 # Start saved session
 tmux attach
 
@@ -839,7 +772,7 @@ tmux attach
 tmux ls
 # Pick whatever session you want to re-attach. Then do ... to re-attach it to a new tmux instance and release it from the old one.
 tmux attach -d -t <session id>
-	
+
 # Start a new shared session
 # for more details -> https://www.howtoforge.com/sharing-terminal-sessions-with-tmux-and-screen
 tmux -S /tmp/shared_session
@@ -847,62 +780,3 @@ chmod 777 /tmp/shared_session #Anyone can now join your session
 # Attach to a shared session
 tmux -S /tmp/shared_session attach
 ```
-	
-## Terminator key bindings
-
-Super+I: new terminator window
-
-F11: Toggle fullscreen
-
-Shift+Ctrl+O: Split horizontally
-
-Shift+Ctrl+E: Split vertically
-
-Shift+Ctrl+T: Create new tab
-
-Super+T: Group terminals in tab
-
-Super+G: Group all terminals
-
-Ctrl+Page Up: Switch to previous tab
-
-Ctrl+Page Down: Switch to next tab
-
-Shift+Ctrl+Up arrow: Resize up
-
-Shift+Ctrl+Down arrow: Resize down
-
-Shift+Ctrl+ -> arrow: Resize right
-
-Shift+Ctrl+ <- arrow: Resize left
-
-
-Alt+Up arrow: Move to terminal up
-
-Alt+Down arrow: Move to terminal down
-
-Alt+ -> arrow: Move to terminal right
-
-Alt+ <- arrow: Move to terminal left
-
-
-Shift+Ctrl+X: Toggle zoom terminal
-
-Shift+Ctrl+F: search terminal
-
-Shift+Ctrl+G: Reset and clear terminal
-
-Shift+Ctrl+R: Reset terminal
-
-Shift+Ctrl+W: Close terminal
-
-Ctrl+Alt+W: Edit window title
-
-Ctrl+Alt+A: Edit tab title
-
-Ctrl+Alt+X: Edit terminal title
-
-
-Ctrl++ : Increase font
-
-Ctrl+- : Decrease font
