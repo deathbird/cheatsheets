@@ -21,6 +21,13 @@ https://docs.github.com/en/get-started/using-github/keyboard-shortcuts
 | **Ctrl + \\**  | Open file in split view (right) |
 | **Ctrl + 0** | Focus main sidebar |
 | **Ctrl + Alt + R** | Open containing folder (from files explorer) |
+| Folding code |
+| **Ctrl + K, Ctrl + 0** | Fold all regions |
+| **Ctrl + K, Ctrl + J** | Unfold all regions |
+| **Ctrl + Shift + [** | Fold region (leave only 1st level, ie class fold) |
+| **Ctrl + Shift + ]** | Unfold region |
+| **Ctrl + K, Ctrl + [** | Fold all subregions |
+| **Ctrl + K, Ctrl + ]** | Unfold all subregions |
 
 ## firefox
 https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly#w_navigation
