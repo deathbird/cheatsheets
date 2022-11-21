@@ -21,6 +21,8 @@ https://docs.github.com/en/get-started/using-github/keyboard-shortcuts
 | **Ctrl + \\**  | Open file in split view (right) |
 | **Ctrl + 0** | Focus main sidebar |
 | **Ctrl + Alt + R** | Open containing folder (from files explorer) |
+| **Shift + Alt + ->** | Expand current selection |
+| **Shift + Alt + <-** | Shrink current selection |
 | Folding code |
 | **Ctrl + K, Ctrl + 0** | Fold all regions |
 | **Ctrl + K, Ctrl + J** | Unfold all regions |
