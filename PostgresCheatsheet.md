@@ -24,6 +24,12 @@ txn=# select nextval('notifications_notificationtypesetting_id_seq');
 ---------
       36
 
+-- show current database
+postgres=# select current_database();
+current_database
+------------------
+postgres
+
 ```
 
 ## DML
