@@ -1,3 +1,35 @@
+# Troubleshoot
+
+```
+COMPOSE_PROJECT_NAME=transifex make up
+docker-compose up apiv3-web
+[+] Running 0/0
+ ⠋ Network transifex_default  Creating                                                                                                                   0.1s
+[+] Running 2/1d orphan containers ([transifex-nginx-1 transifex-tx-storage-service-1 transifex-tx-view-1 transifex-tx-graphql-1]) for this project. If you re ⠿ Network transifex_default        Created                                                                                                              0.1s
+ ⠿ Container transifex-apiv3-web-1  Created                                                                                                              0.0s
+Attaching to transifex-apiv3-web-1
+Error response from daemon: network 70daee9025bfbf08bed430acbc4f09b1cb84e5211d04ba61c8afe5017bebce67 not found
+make: *** [Makefile:63: up] Error 1
+```
+
+This error could arise due to various reasons, such as Docker network conflicts or stale containers and networks. Here are some steps you can follow to troubleshoot the issue:
+
+```bash
+# 1. Remove Stale Containers: Sometimes, containers from the previous build could interfere. Remove them with:
+docker rm -f $(docker ps -a -q)
+
+# 2. Remove Orphan Containers: As the error message suggests, you have orphan containers. You can remove them using:
+docker-compose down --remove-orphans
+
+# 3. Remove Stale Networks: Remove all custom Docker networks that aren't connected to any containers:
+docker network prune
+
+# 4. Restart Docker: Sometimes, the issue might be with Docker itself, so a restart might help.
+
+# 5. Logs and Debug: If the error still persists, try running docker-compose in debug mode to get more details:
+COMPOSE_PROJECT_NAME=transifex docker-compose --verbose up
+```
+
 # Basic Tutorial  
 * detach from the container shell and return to host, the container still runs in the background
 Ctrl+p Ctrl+q  

@@ -729,7 +729,105 @@ $ nslookup
 
 # change to Google DNS server to get an external view
 > server 8.8.8.8
-```
+```  
+
+
+## vim
+
+Buffer mgmt:
+:ls : list buffers
+:b <TAB> : switch between buffers
+:b <part of filename><TAB> : switch to buffer
+:bp(/bn) : switch to previous/next buffer
+:bd[elete] - unload the current buffer and then close the current window
+
+Splits:
+:vsplit [path]: split window vertically opening given file in [path]
+:vs [path]: Exactly equivalent with above
+C - w v: Exactly equivalent with above
+:split [path]: split window horizontally opening given file in [path]
+:sp [path]: Exactly equivalent with above
+C - w s: Exactly equivalent with above
+C - w |: Expand window vertically
+C - w _: Expand window horizontally
+C - w =: Resize previously expanded window in either direction
+
+Lunarvim:
+C - h: Move left between buffers/panes
+C - l: Move right between buffers/panes
+
+Search:
+*/# : search forward (*) / backwords (#) for the word currently under cursor
+
+Move around / Motions:  
+h: Left  
+j: Down  
+k: Up  
+l: Right 
+w : until the start of the next word, EXCLUDING its first character.
+e : to the end of the current word, INCLUDING the last character.
+$ : to the end of the line, INCLUDING the last character.
+): end of current sentence  
+(: start of current sententce  
+}: end of current paragraph  
+{: start of current paragraph  
+C - u: Half page up
+C - d: Page down
+C - b: One page backwards (up)
+C - f: One pade forwards (down)
+C - o: Goto (old) previous position in jumps list (:jumps command)
+C - i: Goto next position in jumps list (:jumps command)
+% : Type  %  to find a matching ),], or }
+`. : Return to last editing position
+g;  : Move backwards in your edit locations (:changes command)
+g,  : Move forwards in your edit locations (:changes command)
+
+Editing:
+p: paste from yank register after cursor position.
+P: paste from yank register before cursor position.
+yy: yank current line (plus carriage return)
+yw: yank word (from cursor position to end of current word)(and put contents to yank register ie "0).
+yiw : yank whole current word (and put contents to yank register ie "0)
+x : delete character under cursor (Normal mode)
+dw: delete current word
+d$: delete from cursor to end of line.
+d + optional<number> + <motion> : motion can be w, e, $ to delete as directed by respective motion.
+optional<number>dd : delete <number> line(s)
+a/(A) : append text (a) after the cursor or (A) on the end of line (enters Insert mode)
+rx: replace character under cursor with x or which other char you type in place of x.
+R<various characters>: Opposite to r command which replaces a single character, R replaces
+                       all characters you type.
+ce: deletes the word and places you in Insert mode.
+cc: DELETE the whole line and enter INSERT mode.
+c + optional<number> + <motion> : motion can be w, e, $ to change as directed by respective motion.
+o/(0) : open a new line below(above) and enter insert mode  
+xp : toggle characters (x cuts char under cursor, p pastes char from def. register after current character).
+ddp : toggle lines (dd cuts current line, p pastes line from def. register after current line).
+yyp : duplicate line (yy copies current line to def. register, p pastes from def. register after current line).
+
+Undo:
+U: undo changes in the whole line (like pressing u many times)
+C - R : re-do previous undos
+
+Substitute command:
+:#,#s/old/new/g :  where #,# are the line numbers of the range of lines where the substitution is to be done.
+:%s/old/new/g   :  to change every occurrence in the whole file.
+:%s/old/new/gc  :  to find every occurrence in the whole file,
+                   with a prompt whether to substitute or not.
+
+
+Select all text in a window:
+1. Goto start of text: gg 
+2. Enter visual mode:  v
+3. Goto end of text:   G
+4. Do action: d (delete), y (yank)
+
+Show lines/columns indication in status-bar:
+:set ruler
+
+Wrap /Nowrap lines:
+;set wrap(/nowrap)
+
 
 ## tmux key bindings / commands
 ```bash
