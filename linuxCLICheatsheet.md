@@ -734,14 +734,16 @@ $ nslookup
 
 ## vim
 
-Buffer mgmt:
+### Buffer mgmt
+
 :ls : list buffers
 :b <TAB> : switch between buffers
 :b <part of filename><TAB> : switch to buffer
 :bp(/bn) : switch to previous/next buffer
 :bd[elete] - unload the current buffer and then close the current window
 
-Splits:
+### Splits
+
 :vsplit [path]: split window vertically opening given file in [path]
 :vs [path]: Exactly equivalent with above
 C - w v: Exactly equivalent with above
@@ -752,18 +754,28 @@ C - w |: Expand window vertically
 C - w _: Expand window horizontally
 C - w =: Resize previously expanded window in either direction
 
-Lunarvim:
-C - h: Move left between buffers/panes
-C - l: Move right between buffers/panes
+### Move between windows
 
-Search:
+C - j / k / l / h: Move down, up, right, left between buffers/panes
+
+### Search buffer wide:
+
 */# : search forward (*) / backwords (#) for the word currently under cursor
 
-Move around / Motions:  
+### Search line wide:
+
+f(some char): find next (some char)
+; :Move to next (some char) occurrence
+, :Move to previous (some char) occurrence
+
+### Move around / Motions:  
+
 h: Left  
 j: Down  
 k: Up  
 l: Right 
+0, ^ : start of line(0), first not blank char(^)
+$, g_ : end of line ($), last none blank char(g_)
 w : until the start of the next word, EXCLUDING its first character.
 e : to the end of the current word, INCLUDING the last character.
 $ : to the end of the line, INCLUDING the last character.
@@ -771,10 +783,20 @@ $ : to the end of the line, INCLUDING the last character.
 (: start of current sententce  
 }: end of current paragraph  
 {: start of current paragraph  
+
 C - u: Half page up
 C - d: Page down
 C - b: One page backwards (up)
 C - f: One pade forwards (down)
+C - e: Move content down while leaving cursor static 
+C - y: Move content up while leaving cursor static
+H: Move to the top section of current page
+M: Move to the middle section of current page
+L: Move to the bottom section of current page
+zt: Scroll page so that current line is at the top of the screen
+zz: Scroll page so that current line is at the middle of the screen
+zb: Scroll page so that current line is at the bottom of the screen
+
 C - o: Goto (old) previous position in jumps list (:jumps command)
 C - i: Goto next position in jumps list (:jumps command)
 % : Type  %  to find a matching ),], or }
@@ -782,7 +804,13 @@ C - i: Goto next position in jumps list (:jumps command)
 g;  : Move backwards in your edit locations (:changes command)
 g,  : Move forwards in your edit locations (:changes command)
 
+Macro:
+qq: start recording
+q: quit macro
+@q: playback
+
 Editing:
+:e <filepath> : edit the file in the current window
 p: paste from yank register after cursor position.
 P: paste from yank register before cursor position.
 yy: yank current line (plus carriage return)
@@ -800,6 +828,7 @@ R<various characters>: Opposite to r command which replaces a single character, 
 ce: deletes the word and places you in Insert mode.
 cc: DELETE the whole line and enter INSERT mode.
 c + optional<number> + <motion> : motion can be w, e, $ to change as directed by respective motion.
+*cgn : Multiple search - replace. * starts a search for the word under cursor, c changes, gn goto next match, do the replacement, hit <ESC>, then press `.` to change next occurence!
 o/(0) : open a new line below(above) and enter insert mode  
 xp : toggle characters (x cuts char under cursor, p pastes char from def. register after current character).
 ddp : toggle lines (dd cuts current line, p pastes line from def. register after current line).
@@ -810,7 +839,7 @@ U: undo changes in the whole line (like pressing u many times)
 C - R : re-do previous undos
 
 Substitute command:
-:#,#s/old/new/g :  where #,# are the line numbers of the range of lines where the substitution is to be done.
+:#,#s/old/new/g :  where #,# are the line numbers of the range of lines where the substitution is to be done. Note that in visual mode (having selected a range) automatically populates the range expression after you press : to start writing the substitution command!
 :%s/old/new/g   :  to change every occurrence in the whole file.
 :%s/old/new/gc  :  to find every occurrence in the whole file,
                    with a prompt whether to substitute or not.

@@ -251,8 +251,10 @@ git clean -fxd :/
 
 # Usage with path specifier (dot matches all files)   
 # https://stackoverflow.com/questions/14460595/git-checkout-with-dot  
-# If you want to revert changes made to the index (i.e., that you have added). It undoes unstaged local modification.  
+# It undoes unstaged local modification.  
 git checkout .   
+# or equivalent
+git restore .
 
 # To undo all staged (added) modifications, use git reset
 git reset  
