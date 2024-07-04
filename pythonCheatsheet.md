@@ -1,7 +1,7 @@
 # Python Cheatsheet
 
 ## Links
-* [Pyenv, virtualenvwrapper, etc setup guide](https://gist.github.com/wronk/a902185f5f8ed018263d828e1027009b)
+* [Pyenv, virtualenv, virtualenvwrapper guide](https://nickolaskraus.io/articles/isolating-python-environments-with-pyenv-virtualenv-and-virtualenvwrapper/)
 * [Virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 * [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/index.html)
 * [Understanding slice notation](https://stackoverflow.com/questions/509211/understanding-slice-notation)
@@ -23,14 +23,47 @@ Ctrl-d 	Exit IPython session
 
 ## virtualenvwrapper
 ```
-# using the above 1st link for pyenv, virtualenvwrapper etc installation use the -p switch with the
-# python version set by pyenv locally (omit minor .4 suffix) to correctly create the virtual env.
-pyenv local 3.7.4
-mkvirtualenv -p python3.7 jdi_flask_test
+# List python versions available to pyenv for local installation
+pyenv install -l
+
+# Install locally a python version
+pyenv install 3.9.18
+
+# Show all locally install python versions available to pyenv
+pyenv versions
+
+# Create virtual environment and activate it
+pyenv virtualenv 3.9.18 txdata_env_name
+pyenv activate txdata_env_name
+
+pyenv deactivate
+
+# Delete environment
+pyenv virtualenv-delete txdata_env_name
 ```
 
 ## PIP
 ```bash
+pip list  # list installed packages
+
+pip install -r requirements.txt  # install from reqs file
+pip install .                    # install from setup.py
+
+# create <project_name>_egg-info/ directory from setup.py
+python setup.py egg_info
+
+# use check to find conflicts
+pip check
+
+# Use pipdeptree to display dependency tree
+pip install piddeptree
+pipdeptree --warn fail
+
+# use pip-compile to check for conflicts
+pip install pip-tools
+echo "-r django_txdata.egg-info/requires.txt" > requirements.in
+pip-compile requirements.in
+
 # Check if a PIP package is installed
 pip show virtualenv
 
@@ -40,7 +73,7 @@ pip show virtualenv
 # check for empty list
 if not a:
   print('list is empty')
-  
+
 # Check all items of a list:
 all(isinstance(x, (int, long)) for x in lst)
 
@@ -120,7 +153,7 @@ slice, of a list by using slice notation
 ['first', 'second', 'third']
 >>> x[-2:]
 ['third', 'fourth']
-```  
+```
 Index from the front using positive indices (starting with 0 as the first element).
 Index from the back using negative indices (starting with -1 as the last element).
 Obtain a slice using [m:n], where m is the inclusive starting point and n is the
@@ -129,7 +162,7 @@ exclusive ending point (see table 3.1). An [:n] slice e starts at its beginning,
 
 You can use this notation to add, remove, and replace elements in a list or to obtain
 an element or a new list that’s a slice from it:
-```python  
+```python
 >>> x = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 >>> x[1] = "two"
 >>> x[8:9] = []
@@ -140,7 +173,7 @@ an element or a new list that’s a slice from it:
 [1, 'two', 3, 4, 5, 6.0, 6.5, 7.0, 8]
 >>> x[5:]
 [6.0, 6.5, 7.0, 8]
-```  
+```
 The size of the list increases or decreases if the new slice is bigger or smaller than the
 slice it’s replacing.
 Some built-in functions ( len , max , and min ), some operators ( in , + , and * ), the
@@ -156,7 +189,7 @@ remove , reverse , and sort ) operate on lists:
 >>> x.reverse()
 >>> x
 [9, 8, 7, 6, 5, 4, 3, 2, 1]
-```  
+```
 The operators + and * each create a new list, leaving the original unchanged. A
 list’s methods are called by using attribute notation on the list itself: x.method
 (arguments)
@@ -181,7 +214,7 @@ Immutable! The operators ( in , + , and * ) and built-in functions ( len , max a
 >>> x = (1, 2, 3, 4)
 >>> list(x)
 [1, 2, 3, 4]
-```  
+```
 
 ## Debugging
 Use pdb or even better ipdb. For async handling (eg celery) use rdb.
@@ -190,16 +223,16 @@ import ipdb
 ipdb.set_trace()
 
 from celery.contrib import rdb
-rdb.set_trace() 
+rdb.set_trace()
 
 # pdb sample commands
 # s (step into)
 # n (step over)
 # r (return - step out of function)
 # c (run to end)
-```  
-pdb docs: https://docs.python.org/3.6/library/pdb.html#pdbcommand-return  
-ipdb docs: https://pypi.org/project/ipdb/  
+```
+pdb docs: https://docs.python.org/3.6/library/pdb.html#pdbcommand-return
+ipdb docs: https://pypi.org/project/ipdb/
 
 ## Inspect state - find help
 globals() — Return a dictionary representing the current global symbol table. This is always the dictionary of the current module (inside a function or method, this is the module where it is defined, not the module from which it is called):
@@ -259,10 +292,10 @@ from __future__ import absolute_import
 #   time.py
 #
 # in python 2:
-import time # will refere to SWS.time module due to the semantics of 
+import time # will refere to SWS.time module due to the semantics of
 # import in ancient python versions (2.x). To fix it add:
 from __future__ import absolute_import # will change the semantics of import to that of python3.x
-# and will only refer to the top-level time module 
+# and will only refer to the top-level time module
 
 # to import a module in our package we use
 # Using an explicit relative import
@@ -303,9 +336,9 @@ help('modules')
 # List Module's Function/Variable Names
 dir(module_name)  # list all names exported by the module module_name.
 # list all names in current scope (but not standard functions).
-dir()  
+dir()
 # To list standard functions
-import __builtin__ 
+import __builtin__
 dir(__builtin__)
 
 # print all names exported by the module
@@ -332,7 +365,7 @@ https://docs.python.org/3/library/unittest.mock.html#module-unittest.mock
             return jwt_token.decode('utf-8')
         else:  # pragma: no cover
             return jwt_token
-            
+
 
 # alternate way
 import six
@@ -341,7 +374,7 @@ if six.PY3:
     unicode_compat = str
 else:
     unicode_compat = unicode
-    
+
 # client code using the above (maybe in some other module):
 return unicode_compat(some_string_variable)
 
