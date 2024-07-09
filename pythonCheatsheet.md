@@ -49,6 +49,10 @@ pip list  # list installed packages
 pip install -r requirements.txt  # install from reqs file
 pip install .                    # install from setup.py
 
+# Uninstall all installed dependencies (undo pip install)
+pip freeze > installed_packages.txt
+pip uninstall -r installed_packages.txt -y
+
 # create <project_name>_egg-info/ directory from setup.py
 python setup.py egg_info
 
