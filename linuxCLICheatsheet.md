@@ -709,6 +709,50 @@ https://dougrathbone.com/blog/2012/03/03/devops-dns-for-developers-ndash-now-the
 # <subdomain of subdomain>.<subdomain>.<domain>.<TLD>
 # TLD: top level domain
 
+# Simple case, 1 IP returned
+$ nslookup translate.verint.com
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	translate.verint.com
+Address: 23.185.0.4
+
+# More IPs serve site content ie for load-balancing
+# To resolve to 1 IP use either ping, curl, traceroute: 
+# ping cf8d-5-203-220-107.ngrok-free.app
+# curl -v htts://cf8d-5-203-220-107.ngrok-free.app
+# traceroute cf8d-5-203-220-107.ngrok-free.app
+$ nslookup https://cf8d-5-203-220-107.ngrok-free.app
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 3.124.142.205
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 18.158.249.75
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 3.125.209.94
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 3.125.223.134
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 3.125.102.39
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 18.192.31.165
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 2a05:d014:21b:8e02::6e:2
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 2a05:d014:21b:8e00::6e:0
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 2a05:d014:21b:8e01::6e:4
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 2a05:d014:21b:8e01::6e:1
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 2a05:d014:21b:8e00::6e:3
+Name:	https://cf8d-5-203-220-107.ngrok-free.app
+Address: 2a05:d014:21b:8e02::6e:5
+
 $ nslookup
 > atcom.gr
 ... απάντηση εμφανίζοντας Α records
