@@ -1,35 +1,35 @@
 # Git Cheatsheet
 
 ## Useful Links
-https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet  
-http://ndpsoftware.com/git-cheatsheet.html   
+https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet
+http://ndpsoftware.com/git-cheatsheet.html
 
-https://en.wikipedia.org/wiki/Version_control#Common_vocabulary  
-http://www.sitepoint.com/git-for-beginners/  
-http://www.sitepoint.com/getting-started-git-team-environment/  
-http://www.sitepoint.com/10-tips-git-next-level/  
-http://www.sitepoint.com/using-git-open-source-projects/  
-http://nvie.com/posts/a-successful-git-branching-model/  
-http://www.sitepoint.com/understanding-version-control-diffs/  
-http://www.sitepoint.com/whats-new-git-2-0  
-https://try.github.io/levels/1/challenges/1  
+https://en.wikipedia.org/wiki/Version_control#Common_vocabulary
+http://www.sitepoint.com/git-for-beginners/
+http://www.sitepoint.com/getting-started-git-team-environment/
+http://www.sitepoint.com/10-tips-git-next-level/
+http://www.sitepoint.com/using-git-open-source-projects/
+http://nvie.com/posts/a-successful-git-branching-model/
+http://www.sitepoint.com/understanding-version-control-diffs/
+http://www.sitepoint.com/whats-new-git-2-0
+https://try.github.io/levels/1/challenges/1
 
-http://marklodato.github.io/visual-git-guide/index-en.html  
-https://github.com/git-tips/tips#everyday-git-in-twenty-commands-or-so  
-https://learngitbranching.js.org/  
+http://marklodato.github.io/visual-git-guide/index-en.html
+https://github.com/git-tips/tips#everyday-git-in-twenty-commands-or-so
+https://learngitbranching.js.org/
 https://www.atlassian.com/git/tutorials/refs-and-the-reflog
 https://www.ocpsoft.org/tutorials/git/use-reflog-and-cherry-pick-to-restore-lost-commits/
 
 
 ## Find file - text - search log
 
-show in which commits a file changed  
+show in which commits a file changed
 `git log --follow Models/Widget/Content/Content.php`
 
-shows the changes of a file, work even if the file was deleted !!!!  
+shows the changes of a file, work even if the file was deleted !!!!
 `git log -- [file path]`
 
-show all files commited on a specific commit  
+show all files commited on a specific commit
 `git diff-tree --no-commit-id --name-only -r bd61ad98`
 
 Search commit log across all branches for given text (in commit messages).
@@ -66,54 +66,54 @@ git push [remote] [local_branch]:[remote_branch]
 # (If you supply an empty [local_branch], it will delete the remote_branch on the server)
 git push [remote] :[remote_branch]
 
-git push -f origin STAGING  
-git push origin r-3.0.0/develop:r-3.0.0/develop  
+git push -f origin STAGING
+git push origin r-3.0.0/develop:r-3.0.0/develop
 ## push -v (verbose), --tags (push tags), -c (config options)
-git -c diff.mnemonicprefix=false -c core.quotepath=false push -v --tags origin r-3.0.0/develop:r-3.0.0/develop  
-```  
+git -c diff.mnemonicprefix=false -c core.quotepath=false push -v --tags origin r-3.0.0/develop:r-3.0.0/develop
+```
 
 ## checkout
 ```bash
-git fetch -v : # update local branch list from remote 	
+git fetch -v : # update local branch list from remote
 
 git checkout -b r-2.0.0/qa --track origin/r-2.0.0/qa
 ```
 
 ## branches
 ```bash
-git branch -a   # (show all local and remote brances!)  
-git branch -r   # (show ONLY remote brances!)  
+git branch -a   # (show all local and remote brances!)
+git branch -r   # (show ONLY remote brances!)
 git branch -u origin/r-3.0.0/feature/IGC-479  # (set current local branch to track remote - upstream branch, -u: upstream)
 git branch --unset-upstream # to remove the tracking to the remote branch
 # Simply delete your remote tracking branch (this will not delete the branch on the remote repo!):
-git branch -d -r origin/<remote branch name> 
+git branch -d -r origin/<remote branch name>
 # display local to remote (upstream) branch mapping!
 git branch -vv   # doubly verbose!
 
 
-# (To create a new branch from current HEAD and switch to it immediately, use:)  
+# (To create a new branch from current HEAD and switch to it immediately, use:)
 
-# new branch points to current branch HEAD  
-git checkout -b [new_branch_name]  
+# new branch points to current branch HEAD
+git checkout -b [new_branch_name]
 
-# Go back in time: new branch points to a previous commit and NOT the current branch HEAD  
-git checkout -b [new_branch_name]  [hash of previous commit from current branch]  
+# Go back in time: new branch points to a previous commit and NOT the current branch HEAD
+git checkout -b [new_branch_name]  [hash of previous commit from current branch]
 
 git fetch [remote]		# (Fetch all of the branches from the repository)
-# (create a local branch and checkout a remote branch to it. The new branch is tracked - git push works!)  
-git checkout --track [remote]/[a_remote_branch]   
-# push local branch and track at the same time (-u is short for --set-upstream).  
-3. git push -u origin <branch>  
+# (create a local branch and checkout a remote branch to it. The new branch is tracked - git push works!)
+git checkout --track [remote]/[a_remote_branch]
+# push local branch and track at the same time (-u is short for --set-upstream).
+3. git push -u origin <branch>
 
-# (create a branch based on an old commit append the hash that identifies a commit with the command.)  
-git checkout -b [branch_name] [commit_hash]  
+# (create a branch based on an old commit append the hash that identifies a commit with the command.)
+git checkout -b [branch_name] [commit_hash]
 
 # replace / overwrite local branch with remote version of branch
 git reset --hard [remote]/[branch_name]
 
-git push [remote] --delete [branch_name]  # delete a branch from a remote  
-git push [remote] :[branch_name]		  # delete a branch from a remote  
-git branch -D [branch_name]               # delete local branch irrespective of its merged status  
+git push [remote] --delete [branch_name]  # delete a branch from a remote
+git push [remote] :[branch_name]		  # delete a branch from a remote
+git branch -D [branch_name]               # delete local branch irrespective of its merged status
 git remote prune [remote]				  # prune stale (deleted but not garbage collected?) branches from [remote]
 
 # Renaming <old_name> Git Branch to <new_name>
@@ -159,12 +159,12 @@ git pull --rebase <origin> <remote_ref>
 #        \ \_K_L_M    <-(branch2)
 #         \_F_G_H     <-(branch1)
 git rebase --onto devel branch1 branch2
-``` 
+```
 
 ## merge
 ```bash
 # (checkout master and merge the desired branch to it)
-git checkout master 
+git checkout master
 git merge [branch_name]
 
 # (picking a single commit from a different branch and merging it with your current one)
@@ -177,27 +177,27 @@ git cherry-pick [start commit_hash]^..[end commit_hash]
 
 ## submodules
 ```bash
-git submodule update --init --recursive   #(That worked!!!!)  
-git submodule update --recursive  
-git submodule update --recursive --remote  #(updating to latest tips of all remote branches)  
+git submodule update --init --recursive   #(That worked!!!!)
+git submodule update --recursive
+git submodule update --recursive --remote  #(updating to latest tips of all remote branches)
 
-# checkout with submodules  
-# checkout a branch (here master) plus submodules  
-git clone --recursive ssh://git@stash.intralot.com:7999/igcprojects/moroccodesktop.git  
+# checkout with submodules
+# checkout a branch (here master) plus submodules
+git clone --recursive ssh://git@stash.intralot.com:7999/igcprojects/moroccodesktop.git
 
-# checkout a remote branch and then it's submodules  
-$ git checkout -b mobileApp --track origin/mobileApp  
-Branch mobileApp set up to track remote branch mobileApp from origin.   
-Switched to a new branch 'mobileApp'  
-$ git pull  
-$ git submodule update  
-Submodule path 'Edge': checked out 'cbdb02f1aed1bd3828db17c91c0d08c369045202'  
-Submodule path 'Sportsbook': checked out 'ad330075757f1886976efcd601555726a7c403d3'  
+# checkout a remote branch and then it's submodules
+$ git checkout -b mobileApp --track origin/mobileApp
+Branch mobileApp set up to track remote branch mobileApp from origin.
+Switched to a new branch 'mobileApp'
+$ git pull
+$ git submodule update
+Submodule path 'Edge': checked out 'cbdb02f1aed1bd3828db17c91c0d08c369045202'
+Submodule path 'Sportsbook': checked out 'ad330075757f1886976efcd601555726a7c403d3'
 
-# clone latest version of project WITH submodules  
-~/projects/www$ git clone --recursive ssh://git@stash.intralot.com:7999/igcprojects/oddsetmobile.git  
+# clone latest version of project WITH submodules
+~/projects/www$ git clone --recursive ssh://git@stash.intralot.com:7999/igcprojects/oddsetmobile.git
 ...
-~/projects/www$ cd oddsetmobile/  
+~/projects/www$ cd oddsetmobile/
 ~/projects/www/oddsetmobile$ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
@@ -210,30 +210,30 @@ Your branch is up-to-date with 'origin/master'.
 ~/projects/www/oddsetmobile$ git submodule update --recursive --remote
 Submodule path 'Cms': checked out '554ab914293239f2ba45086cec2e585de08d8a2c'
 Submodule path 'Edge': checked out 'a630946a9a52af3386f9839cffebf403e7742a19'
-```  
+```
 
 ## log
-```bash  
-git log --graph --all (--oneline)  
-git log --graph --all --oneline --decorate=full # see log graph with branches / tags etc.  
-git log --oneline --decorate  # one line output with all references (branches, tags, etc)  
+```bash
+git log --graph --all (--oneline)
+git log --graph --all --oneline --decorate=full # see log graph with branches / tags etc.
+git log --oneline --decorate  # one line output with all references (branches, tags, etc)
 
 # pretty print tree of branches:
-git log --graph --decorate --oneline  
-git log --graph --pretty=oneline --abbrev-commit  
-```  
+git log --graph --decorate --oneline
+git log --graph --pretty=oneline --abbrev-commit
+```
 
-## config  
+## config
 ```bash
-# dont output crlf warnings  
-git config --global core.autocrlf true   
+# dont output crlf warnings
+git config --global core.autocrlf true
 
-# what file global config is saved in  
+# what file global config is saved in
 git config --global --edit
 
 # show aliases of git commands
 git config --list | grep alias
-```  
+```
 
 ## UNDO!!!!
 
@@ -245,23 +245,23 @@ git reset --hard # removes staged and working directory changes
 ## read comments and manual.
 git clean -f -d # remove untracked
 git clean -f -x -d # CAUTION: as above but removes ignored files like config.
-# CAUTION: as above, but cleans untracked and ignored files through the entire 
+# CAUTION: as above, but cleans untracked and ignored files through the entire
 # repo (without :/, the operation affects only the current directory)
-git clean -fxd :/ 
+git clean -fxd :/
 
-# Usage with path specifier (dot matches all files)   
-# https://stackoverflow.com/questions/14460595/git-checkout-with-dot  
-# It undoes unstaged local modification.  
-git checkout .   
+# Usage with path specifier (dot matches all files)
+# https://stackoverflow.com/questions/14460595/git-checkout-with-dot
+# It undoes unstaged local modification.
+git checkout .
 # or equivalent
 git restore .
 
 # To undo all staged (added) modifications, use git reset
-git reset  
+git reset
 
 # undo last commit: rewind your current HEAD branch return to the one before the current revision
 # After running the command, you'll find the changes as uncommitted local modifications in your working copy.
-git reset --soft HEAD~1  
+git reset --soft HEAD~1
 
 # If you don't want to keep these changes, simply use the --hard flag
 git reset --hard HEAD~1
@@ -277,72 +277,72 @@ git reset HEAD~  ή git reset HEAD^ --hard
 git reset --hard HEAD~3
 
 # DELETE LAST LOCAL + REMOTE COMMIT:
-git reset HEAD^ --hard  
-git push origin -f  
+git reset HEAD^ --hard
+git push origin -f
 
-# If you want to revert a change that you have committed  
-git revert ...  
+# If you want to revert a change that you have committed
+git revert ...
 
-# ABORT MERGE!!!!!  
-git merge --abort  
+# ABORT MERGE!!!!!
+git merge --abort
 
 https://help.github.com/en/articles/changing-a-commit-message
-#(amend last commit comment BEFORE PUSHING)  
-git commit --amend  
+#(amend last commit comment BEFORE PUSHING)
+git commit --amend
 
-#(amend last commit message comment BEFORE PUSHING)  
-git commit --amend -m "New commit message for previous commit."  
+#(amend last commit message comment BEFORE PUSHING)
+git commit --amend -m "New commit message for previous commit."
 
 # amend/add files to a freshly pushed commit (eg noone has pulled the commit or pushed as a Pull Request)
 git commit --amend --no-edit # to amend locally without editing commit message (no-edit)
 git push --force    # to force pushing to remote
 
 # remove unwanted file(s) from git commit:
-# moving the mistakenly committed files back to the staging area from the previous commit, 
+# moving the mistakenly committed files back to the staging area from the previous commit,
 # without cancelling the changes done to them.
 # 1.
-git reset --soft HEAD^ 
+git reset --soft HEAD^
 # 1. (alternative)
 git reset --soft HEAD~1
 # 2. Then reset the unwanted files in order to leave them out from the commit:
 git reset HEAD path/to/unwanted_file
 # 3. Now commit again, you can even re-use the same commit message:
-git commit -c ORIG_HEAD 
+git commit -c ORIG_HEAD
 
 # Amending the message of older or multiple commit messages
 git rebase -i HEAD~3 # Displays a list of the last 3 commits on the current branch
 # Replace pick with reword before each commit message you want to change and then push ...
 git push --force
 
-# return back origin to previous commit 
+# return back origin to previous commit
 # -------------------------------------
 git reset --hard f0fcac15ae4ed32fa3038ab2a7f1fdf91dc9e8e7  # 1. reset local branch to a previous good commit
 git push [remote] :[branch_name]		  # 2. delete the same branch from the remote
 git push origin STAGING					  # 3. push again corrected branch to remote!!!
 
 # master branch has new direct contributions (not through devel branch)
-# so the 2 branches have diverged and we need to refresh devel branch 
+# so the 2 branches have diverged and we need to refresh devel branch
 # with what's in master. Let's say last master branch commit is <hash_master_br>
 git checkout devel
 git update-ref HEAD <hash_master_br>
 git push -f
 
-```  
+```
 
 ## remove / delete files
 ```bash
 # (Remove from git no file / folder delete):
-git rm --cached [file_name]  
-git rm -r --cached [folder_name]  
+git rm --cached [file_name]
+git rm -r --cached [folder_name]
 
-# (Remove from git and from file system)  
-git rm [file_name]  
-```  
+# (Remove from git and from file system)
+git rm [file_name]
+```
 
 ## diff (show differences)
 ```bash
-# show all commited files differences  
-git show <hash>  
+# show all commited files differences
+git show <hash>
 
 ## (View differences in working area)
 git diff <file>
@@ -357,8 +357,8 @@ git diff COMMIT_HASH^ COMMIT_HASH
 ## (View differences of certain file between commits)
 git diff HEAD^^ HEAD main.c
 
-git diff [branch_name1]..[branch_name2]  
-``` 
+git diff [branch_name1]..[branch_name2]
+```
 
 ## repos
 ```bash
@@ -373,19 +373,19 @@ git remote show [remote-name]  # (eg. git remote show origin)
 git remote remove myOrigin     # remove myOrigin remote
 
 # add a remote
-git remote add origin ssh://git@example.com:1234/myRepo.git  
+git remote add origin ssh://git@example.com:1234/myRepo.git
 ```
 
 ## stashing
 ```bash
-# (Stash essentially takes all your changes and stores them for further use)  
-git stash save 'helpfull message about the stashed version'  
+# (Stash essentially takes all your changes and stores them for further use)
+git stash save 'helpfull message about the stashed version'
 
-git stash list  
+git stash list
 
-git stash pop   # apply the last stash and remove it from stash list  
+git stash pop   # apply the last stash and remove it from stash list
 
-git stash apply # apply the last stash and KEEP it in stash list  
+git stash apply # apply the last stash and KEEP it in stash list
 git stash apply stash@{2}
 
 #To show files changed in the last stash
@@ -399,18 +399,28 @@ git stash show -p stash@{1}
 
 #Since git 2.13, there is a command to save a specific path to the stash:
 git stash push -m stash_description path/to/file.json
+
+# Remove (without using) the last stash
+git stash drop
+
+# Remove (without using) the i-th stash
+git stash drop 4
+
+# Clear all stashes
+git stash clear
+
 ```
 
 ## rebase
 ```bash
 # use --preserve-merges to preserve the merge commits
-# it’s best to use when having a base feature “temp” with multiple feature branches, 
+# it’s best to use when having a base feature “temp” with multiple feature branches,
 # as it preserves the merge commits
 # https://stackoverflow.com/questions/15915430/what-exactly-does-gits-rebase-preserve-merges-do-and-why#:~:text=As%20with%20a%20normal%20git,replaying%20works%20for%20merge%20commits.
 # For example, take commit graph where m is a merge commit with parents E and G.
 
 #   B---C <-- master
-#  /                     
+#  /
 # A-------D------E----m----H <-- topic
 #          \         /
 #           F-------G
@@ -426,10 +436,10 @@ git stash push -m stash_description path/to/file.json
 # and then update the commit graph like so:
 # Note that merge commit m is not selected for replay.
 #   B---C <-- master
-#  /     \                
+#  /     \
 # A       D'---E'---F'---G'---H' <-- topic
 
-# If we instead did a --preserve-merges rebase of H on top of C. (For example, checkout topic; rebase --preserve-merges master.) 
+# If we instead did a --preserve-merges rebase of H on top of C. (For example, checkout topic; rebase --preserve-merges master.)
 # In this new case, git would select the following commits for replay:
 
 # pick D
@@ -441,35 +451,35 @@ git stash push -m stash_description path/to/file.json
 # Now m was chosen for replay. Also note that merge parents E and G were picked for inclusion before merge commit m.
 # Here is the resulting commit graph:
 #  B---C <-- master
-# /     \                
+# /     \
 # A      D'-----E'----m'----H' <-- topic
-#         \          / 
+#         \          /
 #          F'-------G'
 
 # (squash number_of_commits into one)
 # https://stackoverflow.com/questions/5189560/squash-my-last-x-commits-together-using-git
 git rebase -i HEAD~[number_of_commits]
 
-# Rebase with squash  
-# -----------------------------------  
+# Rebase with squash
+# -----------------------------------
 git rebase -i HEAD~n    # n : number of commits
 
 # if it breaks you write :
 git rebase --abort
 
-# if there are conflicts you amend them and continue the rebase  
-git rebase --continue  
+# if there are conflicts you amend them and continue the rebase
+git rebase --continue
 
-# Rebase for fast-forward  
+# Rebase for fast-forward
 # -----------------------------------
-# https://git-scm.com/book/en/v2/Git-Branching-Rebasing  
+# https://git-scm.com/book/en/v2/Git-Branching-Rebasing
 
-$ git checkout experiment_branch  
-$ git rebase master  
-First, rewinding head to replay your work on top of it...  
-Applying: added staged command  
-$ git checkout master  
-$ git merge experiment  
+$ git checkout experiment_branch
+$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: added staged command
+$ git checkout master
+$ git merge experiment
 
 ```
 
@@ -492,11 +502,11 @@ Once you are satisfied with your changes, run
   git rebase --continue
 
 
-# Add / Change files from the commit here 
+# Add / Change files from the commit here
 ➜ git stash pop
 # add files to staging area and commit
 ➜ git commit --amend '-S'
-# then continue the rebase 
+# then continue the rebase
 ➜ Git Rebase --continue
 # finally force push to PR
 ➜ git push -f
@@ -553,11 +563,11 @@ do
         indx=$((indx+1))
 #        echo $indx
 done
-```  
+```
 
 ## FAQ - Various
 
-* Show all commits after a given commit and HEAD:  
+* Show all commits after a given commit and HEAD:
 `git rev-list 090cb257b5b..HEAD`
 
 * Retrieve lost commit message. The commit message is stored in .git/COMMIT_EDITMSG. After a "failed" committing attempt, you could run:
@@ -568,31 +578,31 @@ git commit --edit --file=.git/COMMIT_EDITMSG
 git commit -eF .git/COMMIT_EDITMSG
 ```
 
-* make-the-current-commit-the-only-initial-commit-in-a-git-repository:  
+* make-the-current-commit-the-only-initial-commit-in-a-git-repository:
 http://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-initial-commit-in-a-git-repository
 
-    Here's the brute-force approach. It also removes the configuration of the repository:  
+    Here's the brute-force approach. It also removes the configuration of the repository:
     http://stackoverflow.com/questions/1257592/how-do-i-remove-files-saying-old-mode-100755-new-mode-100644-from-unstaged-cha
 
     Note: This does NOT work if the repository has submodules! If you are using submodules, you should use e.g. interactive rebase
 
-    Step 1: remove all history  
+    Step 1: remove all history
     `rm -rf .git`
 
-    Step 2: reconstruct the Git repo with only the current content  
+    Step 2: reconstruct the Git repo with only the current content
     `
     git init
     git add .
     git commit -m "Initial commit"
     `
 
-    Step 3: push to GitHub.  
+    Step 3: push to GitHub.
     `
     git remote add origin <github-uri>    # add a remote repo
     git push -u --force origin master
     `
 
-* How do I make Git ignore file mode (chmod) changes? (I have a project in which I have to change the mode of files with chmod to 777 while developing, but which should not change in the main repo.)  
+* How do I make Git ignore file mode (chmod) changes? (I have a project in which I have to change the mode of files with chmod to 777 while developing, but which should not change in the main repo.)
 `git config core.filemode false`
 
 * create a patch
