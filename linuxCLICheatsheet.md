@@ -719,7 +719,7 @@ Name:	translate.verint.com
 Address: 23.185.0.4
 
 # More IPs serve site content ie for load-balancing
-# To resolve to 1 IP use either ping, curl, traceroute: 
+# To resolve to 1 IP use either ping, curl, traceroute:
 # ping cf8d-5-203-220-107.ngrok-free.app
 # curl -v htts://cf8d-5-203-220-107.ngrok-free.app
 # traceroute cf8d-5-203-220-107.ngrok-free.app
@@ -773,7 +773,7 @@ $ nslookup
 
 # change to Google DNS server to get an external view
 > server 8.8.8.8
-```  
+```
 
 
 ## vim
@@ -812,27 +812,27 @@ f(some char): find next (some char)
 ; :Move to next (some char) occurrence
 , :Move to previous (some char) occurrence
 
-### Move around / Motions:  
+### Move around / Motions:
 
-h: Left  
-j: Down  
-k: Up  
-l: Right 
+h: Left
+j: Down
+k: Up
+l: Right
 0, ^ : start of line(0), first not blank char(^)
 $, g_ : end of line ($), last none blank char(g_)
 w : until the start of the next word, EXCLUDING its first character.
 e : to the end of the current word, INCLUDING the last character.
 $ : to the end of the line, INCLUDING the last character.
-): end of current sentence  
-(: start of current sententce  
-}: end of current paragraph  
-{: start of current paragraph  
+): end of current sentence
+(: start of current sententce
+}: end of current paragraph
+{: start of current paragraph
 
 C - u: Half page up
 C - d: Page down
 C - b: One page backwards (up)
 C - f: One pade forwards (down)
-C - e: Move content down while leaving cursor static 
+C - e: Move content down while leaving cursor static
 C - y: Move content up while leaving cursor static
 H: Move to the top section of current page
 M: Move to the middle section of current page
@@ -873,7 +873,7 @@ ce: deletes the word and places you in Insert mode.
 cc: DELETE the whole line and enter INSERT mode.
 c + optional<number> + <motion> : motion can be w, e, $ to change as directed by respective motion.
 *cgn : Multiple search - replace. * starts a search for the word under cursor, c changes, gn goto next match, do the replacement, hit <ESC>, then press `.` to change next occurence!
-o/(0) : open a new line below(above) and enter insert mode  
+o/(0) : open a new line below(above) and enter insert mode
 xp : toggle characters (x cuts char under cursor, p pastes char from def. register after current character).
 ddp : toggle lines (dd cuts current line, p pastes line from def. register after current line).
 yyp : duplicate line (yy copies current line to def. register, p pastes from def. register after current line).
@@ -890,7 +890,7 @@ Substitute command:
 
 
 Select all text in a window:
-1. Goto start of text: gg 
+1. Goto start of text: gg
 2. Enter visual mode:  v
 3. Goto end of text:   G
 4. Do action: d (delete), y (yank)
@@ -951,3 +951,52 @@ chmod 777 /tmp/shared_session #Anyone can now join your session
 # Attach to a shared session
 tmux -S /tmp/shared_session attach
 ```
+
+## Resolving Disk Space Issues on `/boot` in Ubuntu 22.04.5 LTS
+
+**Problem:**
+You encountered a disk space issue on the `/boot` partition while trying to apply software updates. The system reported that it needs more space, and suggested removing old kernels using `sudo apt autoremove`, but no old kernels were removed.
+
+### Steps Taken:
+
+#### 1. Check Installed Kernels:
+You ran `dpkg --list | grep linux-image` to list the installed kernels. Based on the output, the following kernels were identified:
+- **Current Kernel**: `linux-image-6.8.0-49-generic` (likely in use)
+- **Older Kernels**: `linux-image-6.8.0-48-generic`, `linux-image-6.8.0-47-generic`, `linux-image-5.15.0-128-generic`
+
+#### 2. Identify Active Kernel:
+You confirmed the active kernel with `uname -r`, which helped ensure that you don't remove the currently running kernel.
+
+#### 3. Remove Old Kernels:
+You manually removed the old kernels (excluding the one currently in use) with commands like:
+```bash
+sudo apt-get remove --purge linux-image-6.8.0-48-generic
+sudo apt-get remove --purge linux-image-6.8.0-47-generic
+sudo apt-get remove --purge linux-image-5.15.0-128-generic
+```
+
+#### 4. Clean Up Residual Packages:
+After removing the old kernels, you ran:
+
+```bash
+sudo apt autoremove
+```
+to clean up unnecessary dependencies.
+
+#### 5. Regenerate initramfs:
+Optionally, you updated the initramfs to ensure everything was up-to-date:
+
+```bash
+sudo update-initramfs -u
+```
+
+#### 6. Check Available Space:
+After cleaning up, you checked the available space on /boot using:
+
+```bash
+df -h /boot
+```
+to confirm that sufficient space was freed.
+
+#### 7. (optional) Configuration Review:
+You noted that the COMPRESS=zstd setting in /etc/initramfs-tools/initramfs.conf was already set, which is optimal for both compression efficiency and speed. This setting is sufficient and did not need to be changed to xz.
