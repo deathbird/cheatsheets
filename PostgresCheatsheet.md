@@ -32,26 +32,54 @@ postgres
 
 ```
 
-## DML
+## PostgreSQL catalog queries
 ```SQL
 -- find tables which names contains specific text
 select table_schema,
-       table_name
+       table_name,
+       table_catalog
 from information_schema.tables
 where table_name like 'payment%'
-      and table_schema not in ('information_schema', 'pg_catalog')
+      and table_schema = 'public'
       and table_type = 'BASE TABLE'
       and table_name like '%xxx%'
 order by table_name,
          table_schema;
 
--- Get the row number for every record (DOES ORDERING OF WHOLE QUERYSET)
-select t.id, row_number() OVER (order by t.id) as row_no
-from resources_translation t
-inner join projects_project p on p.id = t.project_id
-where t.source_entity_id in (select id from resources_sourceentity
-                                where pluralized = True)
-    and t.language_id <> p.source_language_id;
+-- Similar to the above (find list of db tables) using Postegresql's catalog view
+SELECT *
+FROM pg_tables
+WHERE schemaname = 'public'
+ORDER BY tablename;
+
+-- Count estimates for all DB tables
+SELECT  n.NspName AS Schema_Name, c.RelName AS Table_Name, c.RelTuples::int AS estimated_rows
+FROM    pg_class                AS c
+        LEFT JOIN pg_namespace  AS n    ON n.oid = c.RelNameSpace
+WHERE   NspName = 'public'
+        AND RelKind='r'
+ORDER   BY N DESC;
+
+-- Identify long running queries
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '10 minute';
+
+-- Kill query
+SELECT pg_terminate_backend(<pid>);
+
+-- kill all other sessions in a database (You have to be superuser to use pg_terminate_backend)
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity WHERE
+-- don't kill my own connection!
+pid <> pg_backend_pid()
+-- don't kill the connections to other databases
+AND datname = 'database_name';
+
 
 
 ```
@@ -80,25 +108,15 @@ where t.source_entity_id in (select id from resources_sourceentity
 
 ## Other
 ```SQL
--- Identify long running queries
-SELECT
-  pid,
-  now() - pg_stat_activity.query_start AS duration,
-  query,
-  state
-FROM pg_stat_activity
-WHERE (now() - pg_stat_activity.query_start) > interval '10 minute';
+-- Get the row number for every record (DOES ORDERING OF WHOLE QUERYSET)
+select t.id, row_number() OVER (order by t.id) as row_no
+from resources_translation t
+inner join projects_project p on p.id = t.project_id
+where t.source_entity_id in (select id from resources_sourceentity
+                                where pluralized = True)
+    and t.language_id <> p.source_language_id;
 
--- Kill query
-SELECT pg_terminate_backend(<pid>);
 
--- kill all other sessions in a database (You have to be superuser to use pg_terminate_backend)
-SELECT pg_terminate_backend(pid)
-FROM pg_stat_activity WHERE
--- don't kill my own connection!
-pid <> pg_backend_pid()
--- don't kill the connections to other databases
-AND datname = 'database_name';
 
 ```
 
