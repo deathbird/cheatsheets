@@ -81,6 +81,10 @@ git checkout -b r-2.0.0/qa --track origin/r-2.0.0/qa
 
 ## branches
 ```bash
+# Output the current branch name
+git branch --show-current
+git rev-parse --abbrev-ref HEAD
+
 git branch -a   # (show all local and remote brances!)
 git branch -r   # (show ONLY remote brances!)
 git branch -u origin/r-3.0.0/feature/IGC-479  # (set current local branch to track remote - upstream branch, -u: upstream)
