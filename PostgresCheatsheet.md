@@ -2,6 +2,9 @@
 
 ## Functions
 ```SQL
+
+SET lock_timeout = '5s';
+
 -- set statement timeout
 SET statement_timeout = '15min';
 SHOW statement_timeout;
@@ -60,6 +63,41 @@ WHERE   NspName = 'public'
         AND RelKind='r'
 ORDER   BY N DESC;
 
+-- Source text of trigger function
+SELECT pg_get_functiondef(p.oid) AS function_definition
+FROM pg_proc p
+WHERE p.proname = 'update_statistics';
+
+-- Find if a trigger function is used on table(s)
+SELECT
+    schemaname AS schema_name,
+    tablename AS table_name,
+    triggername AS trigger_name,
+    proname AS function_name,
+    tgtype,
+    CASE
+        WHEN tgtype & 2 = 2 THEN 'BEFORE'
+        WHEN tgtype & 64 = 64 THEN 'INSTEAD OF'
+        ELSE 'AFTER'
+    END AS trigger_timing,
+    CASE
+        WHEN tgtype & 4 = 4 THEN 'INSERT'
+        WHEN tgtype & 8 = 8 THEN 'DELETE'
+        WHEN tgtype & 16 = 16 THEN 'UPDATE'
+        WHEN tgtype & 12 = 12 THEN 'INSERT OR DELETE'
+        WHEN tgtype & 20 = 20 THEN 'INSERT OR UPDATE'
+        WHEN tgtype & 24 = 24 THEN 'DELETE OR UPDATE'
+        WHEN tgtype & 28 = 28 THEN 'INSERT OR DELETE OR UPDATE'
+    END AS trigger_event,
+    CASE
+        WHEN tgtype & 1 = 1 THEN 'ROW'
+        ELSE 'STATEMENT'
+    END AS trigger_level
+FROM pg_trigger t
+JOIN pg_class c ON t.tgrelid = c.oid
+JOIN pg_proc p ON t.tgfoid = p.oid
+WHERE p.proname = 'update_statistics';
+
 -- Identify long running queries
 SELECT
   pid,
@@ -70,7 +108,7 @@ FROM pg_stat_activity
 WHERE (now() - pg_stat_activity.query_start) > interval '10 minute';
 
 -- Kill query
-SELECT pg_terminate_backend(<pid>);
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid = 12345;
 
 -- kill all other sessions in a database (You have to be superuser to use pg_terminate_backend)
 SELECT pg_terminate_backend(pid)
@@ -80,6 +118,94 @@ pid <> pg_backend_pid()
 -- don't kill the connections to other databases
 AND datname = 'database_name';
 
+-- Kill all queries on a specific table (very dangerous!)
+SELECT pg_terminate_backend(pid)
+FROM pg_locks l
+JOIN pg_class c ON l.relation = c.oid
+WHERE c.relname = 'resources_translation_pt';
+
+-- Show locks with blocking relationships
+WITH lock_info AS (
+    SELECT
+        l.pid,
+        l.mode,
+        l.granted,
+        l.relation,
+        l.page,
+        l.tuple,
+        l.virtualxid,
+        l.transactionid,
+        l.classid,
+        l.objid,
+        l.objsubid,
+        l.virtualtransaction,
+        l.waitstart
+    FROM pg_locks l
+)
+SELECT
+    DISTINCT
+    l1.pid AS blocking_pid,
+    l2.pid AS waiting_pid,
+    l1.mode AS blocking_mode,
+    l2.mode AS waiting_mode,
+    c.relname AS table_name,
+    a1.usename AS blocking_user,
+    a2.usename AS waiting_user,
+    a1.application_name AS blocking_app,
+    a2.application_name AS waiting_app,
+    a1.state AS blocking_state,
+    a2.state AS waiting_state,
+    a1.query AS blocking_query,
+    a2.query AS waiting_query
+FROM lock_info l1
+JOIN lock_info l2 ON (
+    l1.relation = l2.relation
+    AND l1.granted = true
+    AND l2.granted = false
+)
+JOIN pg_class c ON l1.relation = c.oid
+JOIN pg_stat_activity a1 ON l1.pid = a1.pid
+JOIN pg_stat_activity a2 ON l2.pid = a2.pid
+WHERE c.relkind IN ('r', 'p')
+  AND c.relname NOT LIKE 'pg_%'
+
+-- Check locks on a specific table
+SELECT
+    l.pid,
+    l.mode,
+    l.granted,
+    a.usename,
+    a.application_name,
+    a.client_addr,
+    a.state,
+    a.query_start,
+    a.query
+FROM pg_locks l
+JOIN pg_class c ON l.relation = c.oid
+JOIN pg_stat_activity a ON l.pid = a.pid
+WHERE c.relname = 'resources_translation_pt'  -- Replace with your table name
+  AND c.relkind IN ('r', 'p')
+ORDER BY l.pid;
+
+-- Show how long locks have been held
+SELECT
+    l.pid,
+    l.mode,
+    l.granted,
+    c.relname AS table_name,
+    a.usename,
+    a.application_name,
+    a.state,
+    a.query_start,
+    EXTRACT(EPOCH FROM (now() - a.query_start)) AS duration_seconds,
+    a.query
+FROM pg_locks l
+JOIN pg_class c ON l.relation = c.oid
+JOIN pg_stat_activity a ON l.pid = a.pid
+WHERE c.relkind IN ('r', 'p')
+  AND c.relname NOT LIKE 'pg_%'
+  AND a.query_start IS NOT NULL
+ORDER BY duration_seconds DESC;
 
 
 ```
