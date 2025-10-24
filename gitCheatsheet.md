@@ -615,3 +615,86 @@ http://stackoverflow.com/questions/9683279/make-the-current-commit-the-only-init
 * apply patch
 `git apply [file_name]`
 
+Great question! `git blame` is an incredibly useful Git command that helps you understand the **history and authorship** of individual lines in a file. Here's what it does and why it's so valuable:
+
+## `git blame` tutorial
+
+`git blame` shows you **who** wrote each line of code and **when** they wrote it. For each line, it displays:
+- The commit hash
+- The author's name
+- The date and time
+- The line number
+- The actual line content
+
+## Key Benefits
+
+### 1. **Line-by-Line History**
+Instead of seeing the entire file's history, you can see exactly when each specific line was introduced or last modified.
+
+### 2. **Find the Real Author**
+When you see a line of code and wonder "who wrote this?", `git blame` tells you immediately.
+
+### 3. **Understand Context**
+By showing the commit hash, you can then use `git show <hash>` to see the full context of why that line was added.
+
+### 4. **Debugging**
+When you find a bug, you can trace it back to the specific commit and understand the original intent.
+
+## Common Use Cases
+
+### **Investigate Specific Lines**
+```bash
+git blame -L 1367,1367 filename.py  # Show only line 1367
+git blame -L 1360,1375 filename.py  # Show lines 1360-1375
+```
+
+### **Find Recent Changes**
+```bash
+git blame filename.py | grep "2024"  # Find lines changed in 2024
+```
+
+### **Track Down Bugs**
+```bash
+git blame -L 100,200 filename.py  # Focus on a specific range
+```
+
+## Advanced Options
+
+### **Ignore Whitespace Changes**
+```bash
+git blame -w filename.py  # Ignore whitespace-only changes
+```
+
+### **Show More Context**
+```bash
+git blame -C filename.py  # Detect moved/copied lines
+```
+
+### **Different Formats**
+```bash
+git blame --porcelain filename.py  # Machine-readable format
+git blame -e filename.py  # Show email instead of name
+```
+
+## Why It's Better Than Other Approaches
+
+### **vs `git log`**
+- `git log` shows file-level changes
+- `git blame` shows line-level changes
+
+### **vs `git log -p`**
+- `git log -p` shows all changes in commits
+- `git blame` shows the current state with attribution
+
+### **vs Manual Investigation**
+- Much faster than manually checking each commit
+- Gives you the exact commit hash to investigate further
+
+## Pro Tips
+
+1. **Use with `git show`**: After `git blame` gives you a commit hash, use `git show <hash>` to see the full context
+2. **Combine with `git log`**: Use `git log -L` for more detailed history of specific lines
+3. **Ignore formatting**: Use `-w` flag to ignore whitespace-only changes
+4. **Focus on ranges**: Use `-L` to focus on specific line ranges
+
+`git blame` is essentially your "detective tool" for understanding code history - it helps you trace the lineage of every single line in your codebase!
